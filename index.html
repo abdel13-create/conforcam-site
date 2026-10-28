@@ -1,0 +1,1390 @@
+<?php
+session_start();
+
+$messageRetour = "";
+
+if (empty($_SESSION["csrf_token"])) {
+    $_SESSION["csrf_token"] = bin2hex(random_bytes(32));
+}
+
+if (!isset($_SESSION["envois"])) {
+    $_SESSION["envois"] = [];
+}
+
+$_SESSION["envois"] = array_filter(
+    $_SESSION["envois"],
+    function ($heure) {
+        return $heure > time() - 900;
+    }
+);
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+    $nom = trim($_POST["nom"] ?? "");
+    $telephone = trim($_POST["telephone"] ?? "");
+    $ville = trim($_POST["ville"] ?? "");
+    $typeBien = trim($_POST["type_bien"] ?? "");
+    $demande = trim($_POST["demande"] ?? "");
+    $consentement = isset($_POST["consentement"]);
+    $champRobot = trim($_POST["entreprise_site"] ?? "");
+    $csrfRecu = $_POST["csrf_token"] ?? "";
+
+    if ($champRobot !== "") {
+        $messageRetour = "La demande n’a pas pu être envoyée.";
+
+    } elseif (
+        !hash_equals($_SESSION["csrf_token"], $csrfRecu)
+    ) {
+        $messageRetour = "La session a expiré. Rechargez la page et réessayez.";
+
+    } elseif (count($_SESSION["envois"]) >= 3) {
+        $messageRetour = "Trop de demandes ont été envoyées. Réessayez dans 15 minutes.";
+
+    } elseif (
+        $nom === "" ||
+        $telephone === "" ||
+        $ville === "" ||
+        !$consentement
+    ) {
+        $messageRetour = "Merci de remplir tous les champs obligatoires.";
+
+    } elseif (
+        mb_strlen($nom) > 100 ||
+        mb_strlen($telephone) > 30 ||
+        mb_strlen($ville) > 100 ||
+        mb_strlen($demande) > 3000
+    ) {
+        $messageRetour = "Certains champs sont trop longs.";
+
+    } elseif (
+        !preg_match('/^[0-9+().\s-]{8,30}$/', $telephone)
+    ) {
+        $messageRetour = "Le numéro de téléphone semble incorrect.";
+
+    } else {
+
+        $destinataire = "contact@conforcam-fr-543092.hostingersite.com";
+        $sujet = "Nouvelle demande de rappel ConforCam";
+        $frontiere = "=_ConforCam_" . bin2hex(random_bytes(12));
+
+        $entetes = "From: Site ConforCam <contact@conforcam-fr-543092.hostingersite.com>\r\n";
+        $entetes .= "MIME-Version: 1.0\r\n";
+        $entetes .= 'Content-Type: multipart/mixed; boundary="' . $frontiere . '"' . "\r\n";
+
+        $contenu = "--" . $frontiere . "\r\n";
+        $contenu .= "Content-Type: text/plain; charset=UTF-8\r\n";
+        $contenu .= "Content-Transfer-Encoding: 8bit\r\n\r\n";
+
+        $contenu .= "Nouvelle demande depuis conforcam-fr-543092.hostingersite.com\n\n";
+        $contenu .= "Nom : " . $nom . "\n";
+        $contenu .= "Téléphone : " . $telephone . "\n";
+        $contenu .= "Ville : " . $ville . "\n";
+        $contenu .= "Type de bien : " . $typeBien . "\n\n";
+        $contenu .= "Demande :\n" . $demande . "\n\n";
+
+        $formatsAutorises = [
+            "image/jpeg" => "jpg",
+            "image/png" => "png",
+            "image/webp" => "webp"
+        ];
+
+        $nombrePhotos = 0;
+        $erreurPhoto = false;
+
+        if (
+            isset($_FILES["photos"]) &&
+            is_array($_FILES["photos"]["name"])
+        ) {
+
+            $photosEnvoyees = array_filter($_FILES["photos"]["name"]);
+
+            if (count($photosEnvoyees) > 4) {
+                $erreurPhoto = true;
+                $messageRetour = "Vous pouvez envoyer 4 photos maximum.";
+            }
+
+            if (!$erreurPhoto) {
+
+                $finfo = new finfo(FILEINFO_MIME_TYPE);
+
+                foreach ($_FILES["photos"]["tmp_name"] as $numero => $temporaire) {
+
+                    if (empty($_FILES["photos"]["name"][$numero])) {
+                        continue;
+                    }
+
+                    if ($nombrePhotos >= 4) {
+                        break;
+                    }
+
+                    if (
+                        $_FILES["photos"]["error"][$numero] !== UPLOAD_ERR_OK ||
+                        !is_uploaded_file($temporaire)
+                    ) {
+                        $erreurPhoto = true;
+                        $messageRetour = "Une photo n’a pas pu être envoyée.";
+                        break;
+                    }
+
+                    if ($_FILES["photos"]["size"][$numero] > 5 * 1024 * 1024) {
+                        $erreurPhoto = true;
+                        $messageRetour = "Chaque photo doit faire moins de 5 Mo.";
+                        break;
+                    }
+
+                    $typeReel = $finfo->file($temporaire);
+
+                    if (!isset($formatsAutorises[$typeReel])) {
+                        $erreurPhoto = true;
+                        $messageRetour = "Seuls les fichiers JPG, PNG et WEBP sont acceptés.";
+                        break;
+                    }
+
+                    $extension = $formatsAutorises[$typeReel];
+                    $nomFichier = "photo-" . ($nombrePhotos + 1) . "." . $extension;
+
+                    $donnees = chunk_split(
+                        base64_encode(file_get_contents($temporaire))
+                    );
+
+                    $contenu .= "--" . $frontiere . "\r\n";
+                    $contenu .= 'Content-Type: ' . $typeReel . '; name="' . $nomFichier . '"' . "\r\n";
+                    $contenu .= 'Content-Disposition: attachment; filename="' . $nomFichier . '"' . "\r\n";
+                    $contenu .= "Content-Transfer-Encoding: base64\r\n\r\n";
+                    $contenu .= $donnees . "\r\n";
+
+                    $nombrePhotos++;
+                }
+            }
+        }
+
+        if (!$erreurPhoto) {
+
+            $contenu .= "--" . $frontiere . "--";
+
+            if (@mail($destinataire, $sujet, $contenu, $entetes)) {
+
+                $_SESSION["envois"][] = time();
+                $_SESSION["csrf_token"] = bin2hex(random_bytes(32));
+
+                $messageRetour = "Merci. Votre demande a bien été envoyée. ConforCam vous recontactera dans les meilleurs délais.";
+
+            } else {
+
+                $messageRetour = "L’envoi n’a pas fonctionné. Appelez-nous au 07 70 47 02 18.";
+            }
+        }
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="fr">
+
+<head><!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TJMLNLKC');</script>
+<!-- End Google Tag Manager -->
+
+<meta charset="UTF-8">
+<link rel="canonical" href="https://conforcam-fr-543092.hostingersite.com/">
+<meta name="robots" content="index,follow,max-image-preview:large">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Caméra & alarme sans abonnement Marseille | ConforCam</title>
+
+<meta
+name="description"
+content="Installation de caméras de surveillance et alarmes sans abonnement à Marseille et dans les Bouches-du-Rhône. Devis gratuit ConforCam."
+>
+
+<style>
+
+:root{
+--fond:#020b14;
+--fond-clair:#061b2f;
+--carte:#08243d;
+--bleu:#159fff;
+--bleu-clair:#80d3ff;
+--texte:#f4f9fd;
+--texte-secondaire:#afc3d1;
+--bordure:#1d587f;
+}
+
+*{
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+margin:0;
+font-family:Arial,Helvetica,sans-serif;
+background:var(--fond);
+color:var(--texte);
+line-height:1.6;
+}
+
+a{
+color:inherit;
+text-decoration:none;
+}
+
+img{
+display:block;
+max-width:100%;
+}
+
+.navigation{
+position:sticky;
+top:0;
+z-index:50;
+display:flex;
+align-items:center;
+gap:25px;
+padding:10px 5%;
+background:rgba(2,11,20,.96);
+border-bottom:1px solid #174566;
+}
+
+.navigation .logo{
+width:230px;
+height:62px;
+object-fit:cover;
+object-position:left center;
+}
+
+.navigation nav{
+display:flex;
+gap:22px;
+margin-left:auto;
+}
+
+.navigation nav a{
+font-size:14px;
+color:#d5e3ec;
+}
+
+.telephone-haut{
+padding:10px 15px;
+border:1px solid var(--bordure);
+border-radius:9px;
+font-weight:bold;
+}
+
+.hero{
+min-height:700px;
+display:grid;
+grid-template-columns:1fr 1.05fr;
+align-items:center;
+background:
+radial-gradient(circle at 85% 25%,#0c4b7b 0,transparent 36%),
+linear-gradient(130deg,#020b14,#061c31);
+overflow:hidden;
+}
+
+.hero-texte{
+padding:80px 6% 80px 9%;
+position:relative;
+z-index:2;
+}
+
+.badge{
+display:inline-block;
+padding:8px 13px;
+border:1px solid #2b739d;
+border-radius:50px;
+color:var(--bleu-clair);
+font-size:12px;
+font-weight:bold;
+letter-spacing:1.5px;
+text-transform:uppercase;
+}
+
+.hero h1{
+font-size:clamp(48px,6vw,82px);
+line-height:1;
+margin:22px 0;
+letter-spacing:-2px;
+text-transform:uppercase;
+}
+
+.hero h1 span{
+color:var(--bleu-clair);
+}
+
+.hero-description{
+max-width:680px;
+font-size:20px;
+color:#c4d4df;
+}
+
+.liste-hero{
+display:grid;
+gap:10px;
+margin:28px 0;
+color:#c4d4df;
+}
+
+.actions{
+display:flex;
+flex-wrap:wrap;
+gap:14px;
+margin-top:30px;
+}
+
+.bouton{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+padding:16px 22px;
+border-radius:9px;
+font-size:16px;
+font-weight:bold;
+border:0;
+cursor:pointer;
+}
+
+.bouton-principal{
+background:linear-gradient(180deg,#2ab9ff,#0877d9);
+box-shadow:0 0 28px rgba(21,159,255,.30);
+color:white;
+}
+
+.bouton-secondaire{
+border:1px solid #3279a6;
+background:rgba(2,11,20,.45);
+color:white;
+}
+
+.hero-image{
+height:100%;
+min-height:700px;
+position:relative;
+}
+
+.hero-image::before{
+content:"";
+position:absolute;
+inset:0;
+z-index:1;
+background:linear-gradient(90deg,var(--fond),transparent 30%);
+}
+
+.hero-image img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.bandeau{
+width:min(1180px,92%);
+margin:-42px auto 0;
+position:relative;
+z-index:4;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+background:linear-gradient(180deg,#092740,#041725);
+border:1px solid #236c98;
+border-radius:14px;
+overflow:hidden;
+box-shadow:0 20px 55px rgba(0,0,0,.40);
+}
+
+.bandeau div{
+padding:23px;
+text-align:center;
+border-right:1px solid #1b5278;
+}
+
+.bandeau div:last-child{
+border-right:0;
+}
+
+.bandeau strong{
+display:block;
+color:var(--bleu-clair);
+font-size:18px;
+}
+
+.bandeau span{
+font-size:14px;
+color:var(--texte-secondaire);
+}
+
+.section{
+padding:90px 6%;
+}
+
+.surtitre{
+color:var(--bleu-clair);
+font-size:12px;
+font-weight:bold;
+letter-spacing:2px;
+text-transform:uppercase;
+}
+
+.section h2{
+font-size:clamp(35px,4.5vw,58px);
+line-height:1.08;
+margin:10px 0 35px;
+}
+
+.cartes{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+}
+
+.carte{
+padding:28px;
+background:linear-gradient(180deg,#092740,#051522);
+border:1px solid var(--bordure);
+border-radius:15px;
+}
+
+.carte-numero{
+color:var(--bleu-clair);
+font-weight:bold;
+}
+
+.carte h3{
+font-size:24px;
+margin:15px 0 8px;
+}
+
+.carte p{
+color:var(--texte-secondaire);
+}
+
+.realisations{
+background:linear-gradient(180deg,#061a2d,#020b14);
+}
+
+.galerie{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px;
+}
+
+.galerie figure{
+margin:0;
+background:#071d31;
+border:1px solid #1d557a;
+border-radius:13px;
+overflow:hidden;
+}
+
+.galerie img{
+width:100%;
+aspect-ratio:4/3;
+object-fit:cover;
+transition:transform .3s ease;
+}
+
+.galerie figure:hover img{
+transform:scale(1.04);
+}
+
+.galerie figcaption{
+padding:13px;
+color:#c9d8e2;
+}
+
+.pourquoi{
+background:#03101c;
+}
+
+.avantages{
+max-width:950px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:16px 30px;
+}
+
+.avantage{
+padding:17px;
+background:#071e32;
+border-left:3px solid var(--bleu);
+border-radius:7px;
+font-size:18px;
+font-weight:bold;
+}
+
+.zone{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:60px;
+align-items:center;
+}
+
+.villes{
+display:flex;
+flex-wrap:wrap;
+gap:11px;
+}
+
+.villes span{
+padding:10px 14px;
+border:1px solid #28688f;
+background:#08243d;
+border-radius:50px;
+}
+
+.contact{
+display:grid;
+grid-template-columns:.8fr 1.2fr;
+gap:55px;
+background:
+radial-gradient(circle at 10% 20%,#0d4773 0,transparent 30%),
+#04111e;
+}
+
+.contact-intro p{
+color:var(--texte-secondaire);
+font-size:18px;
+}
+
+.coordonnees{
+margin-top:25px;
+display:grid;
+gap:8px;
+}
+
+.coordonnees a{
+color:var(--bleu-clair);
+font-weight:bold;
+font-size:18px;
+}
+
+form{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:16px;
+padding:27px;
+background:#071e32;
+border:1px solid #205e86;
+border-radius:15px;
+}
+
+form label{
+display:grid;
+gap:7px;
+font-weight:bold;
+}
+
+input,
+select,
+textarea{
+width:100%;
+padding:14px;
+border:1px solid #32698d;
+border-radius:8px;
+background:#03111e;
+color:white;
+font:inherit;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+outline:2px solid var(--bleu);
+}
+
+.large{
+grid-column:1/-1;
+}
+
+.consentement{
+display:flex;
+align-items:flex-start;
+gap:10px;
+font-weight:normal;
+color:#c4d5df;
+}
+
+.consentement input{
+width:auto;
+margin-top:6px;
+}
+
+.message-retour{
+padding:14px;
+border:1px solid #2e7ca8;
+border-radius:8px;
+background:#082a45;
+color:var(--bleu-clair);
+font-weight:bold;
+}
+
+.whatsapp{
+position:fixed;
+right:20px;
+bottom:20px;
+z-index:60;
+padding:14px 18px;
+border-radius:50px;
+background:#20bd64;
+color:white;
+font-weight:bold;
+box-shadow:0 12px 35px rgba(0,0,0,.35);
+}
+
+.appel-mobile{
+display:none;
+position:fixed;
+left:20px;
+bottom:20px;
+z-index:60;
+padding:14px 18px;
+border-radius:50px;
+background:var(--bleu);
+color:white;
+font-weight:bold;
+box-shadow:0 12px 35px rgba(0,0,0,.35);
+}
+
+footer{
+display:grid;
+grid-template-columns:1.2fr 1fr 1fr;
+gap:30px;
+padding:38px 6%;
+background:#01070d;
+border-top:1px solid #174668;
+}
+
+footer img{
+width:230px;
+height:65px;
+object-fit:cover;
+object-position:left center;
+}
+
+footer a,
+footer p{
+display:block;
+color:var(--texte-secondaire);
+margin:5px 0;
+}
+
+@media(max-width:900px){
+
+.navigation nav,
+.telephone-haut{
+display:none;
+}
+
+.hero{
+grid-template-columns:1fr;
+}
+
+.hero-image{
+min-height:400px;
+}
+
+.bandeau{
+grid-template-columns:1fr 1fr;
+margin-top:0;
+}
+
+.cartes,
+.galerie{
+grid-template-columns:1fr 1fr;
+}
+
+.zone,
+.contact{
+grid-template-columns:1fr;
+}
+
+}
+
+@media(max-width:600px){
+
+.navigation{
+padding:8px 5%;
+}
+
+.navigation .logo{
+width:190px;
+height:55px;
+}
+
+.hero{
+min-height:auto;
+}
+
+.hero-texte{
+padding:55px 6%;
+}
+
+.hero h1{
+font-size:43px;
+letter-spacing:-1px;
+}
+
+.hero-description{
+font-size:18px;
+}
+
+.hero-image{
+min-height:310px;
+}
+
+.bandeau,
+.cartes,
+.galerie,
+form,
+footer{
+grid-template-columns:1fr;
+}
+
+.bandeau div{
+border-right:0;
+border-bottom:1px solid #1b5278;
+}
+
+.section{
+padding:65px 6%;
+}
+
+.section h2{
+font-size:31px;
+}
+
+.avantages{
+grid-template-columns:1fr;
+}
+
+.avantage{
+font-size:17px;
+}
+
+.large{
+grid-column:auto;
+}
+
+.whatsapp{
+right:12px;
+bottom:14px;
+}
+
+.appel-mobile{
+display:block;
+left:12px;
+bottom:14px;
+}
+
+}
+
+</style>
+
+
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"ConforCam","url":"https://conforcam-fr-543092.hostingersite.com/","telephone":"+33770470218","email":"contact@conforcam-fr-543092.hostingersite.com","description":"Installation de caméras de surveillance et alarmes sans abonnement à Marseille et dans les Bouches-du-Rhône.","areaServed":["Marseille","Bouches-du-Rhône","Aix-en-Provence","Aubagne","Allauch","Plan-de-Cuques","Cassis","La Ciotat"]}</script>
+</head>
+
+<body><!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TJMLNLKC"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<header class="navigation">
+
+<a href="#accueil">
+<img class="logo" src="assets/logo.jpg" alt="Logo ConforCam">
+</a>
+
+<nav>
+<a href="#prestations">Prestations</a>
+<a href="#realisations">Réalisations</a>
+<a href="#pourquoi">Pourquoi nous</a>
+<a href="#rappel">Être rappelé</a>
+</nav>
+
+<a class="telephone-haut" href="tel:+33770470218">
+07 70 47 02 18
+</a>
+
+</header>
+
+<main>
+
+<section class="hero" id="accueil">
+
+<div class="hero-texte">
+
+<span class="badge">
+Marseille • Région PACA
+</span>
+
+<h1>
+Caméras et alarmes<br>
+<span>sans abonnement à Marseille.</span>
+</h1>
+
+<p class="hero-description">
+Solutions professionnelles de vidéosurveillance et d’alarme
+pour les particuliers et les professionnels,
+sans abonnement et sans mensualité imposée.
+</p>
+
+<div class="liste-hero">
+
+<span>✓ Matériel garanti 2 ans</span>
+
+<span>✓ Consultation depuis votre smartphone</span>
+
+<span>✓ Installation et programmation complètes</span>
+
+</div>
+
+<div class="actions">
+
+<a class="bouton bouton-principal" href="#rappel">
+Être rappelé gratuitement
+</a>
+
+<a class="bouton bouton-secondaire" href="tel:+33770470218">
+Appeler maintenant
+</a>
+
+</div>
+
+</div>
+
+<div class="hero-image">
+
+<img
+src="assets/hero.jpg"
+alt="Caméras et alarme ConforCam"
+>
+
+</div>
+
+</section>
+
+<section class="bandeau">
+
+<div>
+<strong>Sans abonnement</strong>
+<span>Aucune mensualité imposée</span>
+</div>
+
+<div>
+<strong>Garantie 2 ans</strong>
+<span>Garantie du matériel</span>
+</div>
+
+<div>
+<strong>Devis gratuit</strong>
+<span>Étude personnalisée</span>
+</div>
+
+<div>
+<strong>Région PACA</strong>
+<span>Intervention sur rendez-vous</span>
+</div>
+
+</section>
+
+<section class="section" id="prestations">
+
+<span class="surtitre">
+Nos prestations
+</span>
+
+<h2>
+Une protection adaptée à votre besoin
+</h2>
+
+<div class="cartes">
+
+<article class="carte">
+
+<span class="carte-numero">01</span>
+
+<h3>Caméras filaires</h3>
+
+<p>
+Installation, câblage, enregistrement local
+et consultation depuis votre téléphone.
+</p>
+
+</article>
+
+<article class="carte">
+
+<span class="carte-numero">02</span>
+
+<h3>Caméras sans fil</h3>
+
+<p>
+Solutions Wi-Fi ou autonomes pour protéger
+l’intérieur et l’extérieur de votre bien.
+</p>
+
+</article>
+
+<article class="carte">
+
+<span class="carte-numero">03</span>
+
+<h3>Alarmes sans abonnement</h3>
+
+<p>
+Détecteurs, sirène et application mobile
+sans frais mensuels obligatoires.
+</p>
+
+</article>
+
+</div>
+
+</section>
+
+<section class="section realisations" id="realisations">
+
+<span class="surtitre">
+Nos réalisations
+</span>
+
+<h2>
+Des installations réelles
+</h2>
+
+<div class="galerie">
+
+<figure>
+<img loading="lazy" decoding="async" src="assets/realisations/Maison.jpg"
+alt="Protection d'une maison sans abonnement">
+<figcaption>
+Protection de votre maison sans abonnement
+</figcaption>
+</figure>
+
+<figure>
+<img loading="lazy" decoding="async" src="assets/realisations/Boutique.jpg"
+alt="Protection des commerces et professionnels">
+<figcaption>
+Protection des commerces et professionnels
+</figcaption>
+</figure>
+
+<figure>
+<img loading="lazy" decoding="async" src="assets/realisations/Application.jpg"
+alt="Contrôlez votre système depuis votre smartphone">
+<figcaption>
+Contrôlez votre système depuis votre smartphone
+</figcaption>
+</figure>
+
+<figure>
+<img loading="lazy" decoding="async" src="assets/realisations/Commerce.jpg"
+alt="Installation réalisée par ConforCam">
+<figcaption>
+Installation réalisée par ConforCam en région PACA
+</figcaption>
+</figure>
+</div>
+
+</section>
+
+<section class="section pourquoi" id="pourquoi">
+
+<span class="surtitre">
+Pourquoi choisir ConforCam
+</span>
+
+<h2>
+Votre matériel vous appartient.
+</h2>
+
+<div class="avantages">
+
+<div class="avantage">
+✓ Aucun abonnement
+</div>
+
+<div class="avantage">
+✓ Matériel garanti 2 ans
+</div>
+
+<div class="avantage">
+✓ Installation professionnelle
+</div>
+
+<div class="avantage">
+✓ Programmation sur smartphone
+</div>
+
+<div class="avantage">
+✓ Devis gratuit
+</div>
+
+<div class="avantage">
+✓ Particuliers et professionnels
+</div>
+
+<div class="avantage">
+✓ Assistance après installation
+</div>
+
+<div class="avantage">
+✓ Intervention en région PACA
+</div>
+
+</div>
+
+</section>
+
+<section class="section zone">
+
+<div>
+
+<span class="surtitre">
+Zone d’intervention
+</span>
+
+<h2>
+Toute la région PACA
+</h2>
+
+<p>
+Marseille du 13001 au 13016, Aix-en-Provence,
+Aubagne, Allauch, Plan-de-Cuques, Cassis,
+La Ciotat, Carry-le-Rouet, Toulon et alentours.
+</p>
+
+</div>
+
+<div class="villes">
+
+<span>Marseille</span>
+<span>Aix-en-Provence</span>
+<span>Aubagne</span>
+<span>Allauch</span>
+<span>Plan-de-Cuques</span>
+<span>Cassis</span>
+<span>La Ciotat</span>
+<span>Carry-le-Rouet</span>
+<span>Toulon</span>
+
+</div>
+
+</section>
+
+<section class="section" id="solutions-marseille">
+<span class="surtitre">Sécurité à Marseille</span>
+<h2>Installation de caméras et alarmes à Marseille</h2>
+<p>ConforCam installe des solutions de vidéosurveillance et d’alarme sans abonnement pour maisons, appartements, commerces et entreprises à Marseille et dans les Bouches-du-Rhône.</p>
+<div class="cartes">
+<article class="carte"><h3><a href="camera-surveillance-marseille/">Caméra de surveillance Marseille</a></h3><p>Installation professionnelle, accès smartphone et enregistrement selon votre projet.</p></article>
+<article class="carte"><h3><a href="alarme-sans-abonnement-marseille/">Alarme sans abonnement Marseille</a></h3><p>Détecteurs, sirènes et alertes mobiles sans mensualité imposée.</p></article>
+<article class="carte"><h3><a href="videosurveillance-marseille/">Vidéosurveillance Marseille</a></h3><p>Solutions pour particuliers, commerces et entreprises.</p></article>
+</div>
+<p style="margin-top:24px"><a class="bouton bouton-secondaire" href="blog/">Conseils sécurité & blog</a></p>
+</section>
+<!-- FAQ SEO ConforCam -->
+<section class="section faq" id="faq">
+
+  <span class="surtitre">Questions fréquentes</span>
+  <h2>Caméras et alarmes sans abonnement à Marseille : vos questions</h2>
+
+  <details>
+    <summary>Combien coûte l'installation de caméras de surveillance à Marseille ?</summary>
+    <p>Le tarif dépend du nombre de caméras, du type de matériel, de la configuration des lieux et de la complexité de l'installation. ConforCam propose un devis gratuit adapté à votre maison, appartement, commerce ou entreprise.</p>
+  </details>
+
+  <details>
+    <summary>Peut-on installer des caméras de surveillance sans abonnement ?</summary>
+    <p>Oui. ConforCam installe des systèmes de vidéosurveillance sans abonnement mensuel. Le matériel vous appartient et vous pouvez consulter vos caméras depuis votre smartphone selon l'installation choisie.</p>
+  </details>
+
+  <details>
+    <summary>Une alarme peut-elle fonctionner sans abonnement ?</summary>
+    <p>Oui. Une alarme sans abonnement peut fonctionner avec des détecteurs, des sirènes et des alertes sur smartphone sans imposer de mensualité de télésurveillance.</p>
+  </details>
+
+  <details>
+    <summary>Caméra filaire ou sans fil : que choisir ?</summary>
+    <p>Le choix dépend du bâtiment et de vos besoins. Une installation filaire est particulièrement adaptée lorsqu'un câblage est possible, tandis qu'une solution sans fil peut faciliter l'installation dans certaines configurations.</p>
+  </details>
+
+  <details>
+    <summary>Puis-je voir mes caméras depuis mon téléphone ?</summary>
+    <p>Oui. Selon le système installé, une application mobile permet de consulter les images de vos caméras à distance et de recevoir des notifications.</p>
+  </details>
+
+  <details>
+    <summary>Installez-vous des caméras dans les commerces et entreprises ?</summary>
+    <p>Oui. ConforCam réalise des installations de vidéosurveillance pour les particuliers, commerces, bureaux et entreprises afin d'adapter la couverture aux accès et aux zones à protéger.</p>
+  </details>
+
+  <details>
+    <summary>Intervenez-vous uniquement à Marseille ?</summary>
+    <p>Non. ConforCam intervient à Marseille ainsi que dans les Bouches-du-Rhône et, selon le projet, dans d'autres secteurs de la région Provence-Alpes-Côte d'Azur.</p>
+  </details>
+
+  <details>
+    <summary>Le matériel de vidéosurveillance m'appartient-il ?</summary>
+    <p>Oui. Avec les solutions ConforCam sans abonnement, vous achetez votre équipement : le matériel installé vous appartient.</p>
+  </details>
+
+</section>
+<!-- Fin FAQ SEO ConforCam -->
+<section class="section contact" id="rappel">
+
+<div class="contact-intro">
+
+<span class="surtitre">
+Rappel gratuit
+</span>
+
+<h2>
+Être rappelé gratuitement
+</h2>
+
+<p>
+Laissez vos coordonnées et décrivez votre projet.
+ConforCam vous recontactera dans les meilleurs délais.
+</p>
+
+<div class="coordonnees">
+
+<a href="tel:+33770470218">
+07 70 47 02 18
+</a>
+
+<a href="mailto:contact@conforcam-fr-543092.hostingersite.com">
+contact@conforcam-fr-543092.hostingersite.com
+</a>
+
+</div>
+
+</div>
+
+<form
+method="POST"
+enctype="multipart/form-data"
+><input
+type="hidden"
+name="csrf_token"
+value="<?= htmlspecialchars($_SESSION["csrf_token"], ENT_QUOTES, "UTF-8") ?>"
+>
+
+<div style="position:absolute;left:-9999px;" aria-hidden="true">
+
+<input
+type="text"
+name="entreprise_site"
+tabindex="-1"
+autocomplete="off"
+>
+
+</div>
+
+<label>
+Nom et prénom *
+
+<input
+type="text"
+name="nom"
+required
+>
+
+</label>
+
+<label>
+Téléphone *
+
+<input
+type="tel"
+name="telephone"
+required
+>
+
+</label>
+
+<label>
+Ville *
+
+<input
+type="text"
+name="ville"
+required
+>
+
+</label>
+
+<label>
+Type de bien
+
+<select name="type_bien">
+
+<option>Maison</option>
+<option>Appartement</option>
+<option>Commerce</option>
+<option>Hôtel</option>
+<option>Bureau</option>
+<option>Autre</option>
+
+</select>
+
+</label>
+
+<label class="large">
+
+Votre demande
+
+<textarea
+name="demande"
+rows="5"
+placeholder="Décrivez votre projet..."
+></textarea>
+
+</label>
+
+<label class="large">
+
+Ajouter jusqu’à 4 photos
+
+<input
+id="photos"
+type="file"
+name="photos[]"
+accept="image/jpeg,image/png,image/webp"
+multiple
+>
+
+</label>
+
+<small class="large">
+Maximum 4 photos, 5 Mo par photo.
+</small>
+
+<label class="consentement large">
+
+<input
+type="checkbox"
+name="consentement"
+required
+>
+
+<span>
+J’accepte que mes informations et mes photos
+soient utilisées uniquement pour traiter ma demande.
+</span>
+
+</label>
+
+<button
+class="bouton bouton-principal large"
+type="submit"
+>
+
+Envoyer ma demande
+
+</button>
+
+<?php if ($messageRetour !== ""): ?>
+
+<p class="message-retour large">
+
+<?= htmlspecialchars(
+$messageRetour,
+ENT_QUOTES,
+"UTF-8"
+) ?>
+
+</p>
+
+<?php endif; ?>
+
+</form>
+
+</section>
+
+</main>
+
+<a
+class="whatsapp"
+href="https://wa.me/33770470218?text=Bonjour%20ConforCam%2C%20je%20souhaite%20un%20devis."
+target="_blank"
+rel="noopener"
+>
+
+WhatsApp
+
+</a>
+
+<a
+class="appel-mobile"
+href="tel:+33770470218"
+>
+
+Appeler
+
+</a>
+
+<footer>
+
+<img
+src="assets/logo.jpg"
+alt="Logo ConforCam"
+>
+
+<div>
+
+<strong>ConforCam</strong>
+
+<p>
+Caméras et alarmes sans abonnement.
+</p>
+
+</div>
+
+<div>
+
+<a href="tel:+33770470218">
+07 70 47 02 18
+</a>
+
+<a href="mailto:conforcam13@gmail.com">
+contact@conforcam-fr-543092.hostingersite.com 
+</a>
+
+<a href="mentions-legales.html">
+Mentions légales
+</a>
+
+</div>
+
+</footer>
+
+<script>
+
+const champPhotos = document.getElementById("photos");
+
+champPhotos.addEventListener("change", function(){
+
+if(this.files.length > 4){
+
+alert("Vous pouvez sélectionner 4 photos maximum.");
+
+this.value = "";
+
+}
+
+});
+
+</script>
+
+</body>
+
+</html>
