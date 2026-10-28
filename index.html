@@ -35,85 +35,735 @@ content="Installation de caméras de surveillance et alarmes sans abonnement à 
 --bordure:#1d587f;
 }
 
-.mini-slider { max-width: 100%; height: 350px; position: relative; overflow: hidden; background: #000; margin-bottom: 0; }
-.mini-slide { display: none; width: 100%; height: 100%; animation: fadeIn 0.6s ease; }
-.mini-slide.active { display: block; }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-.mini-slide img { width: 100%; height: 100%; object-fit: cover; }
-.mini-dots { position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); display: flex; gap: 8px; }
-.mini-dot { width: 10px; height: 10px; border-radius: 50%; background: rgba(255,255,255,0.3); cursor: pointer; transition: all 0.3s ease; border: 2px solid transparent; }
-.mini-dot.active { background: #159fff; border-color: #159fff; }
-@media (max-width: 768px) { .mini-slider { height: 250px; } }
+*{
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+margin:0;
+font-family:Arial,Helvetica,sans-serif;
+background:var(--fond);
+color:var(--texte);
+line-height:1.6;
+}
+
+a{
+color:inherit;
+text-decoration:none;
+}
+
+img{
+display:block;
+max-width:100%;
+}
+
+.navigation{
+position:sticky;
+top:0;
+z-index:50;
+display:flex;
+align-items:center;
+gap:25px;
+padding:10px 5%;
+background:rgba(2,11,20,.96);
+border-bottom:1px solid #174566;
+}
+
+.navigation .logo{
+width:230px;
+height:62px;
+object-fit:cover;
+object-position:left center;
+}
+
+.navigation nav{
+display:flex;
+gap:22px;
+margin-left:auto;
+}
+
+.navigation nav a{
+font-size:14px;
+color:#d5e3ec;
+}
+
+.telephone-haut{
+padding:10px 15px;
+border:1px solid var(--bordure);
+border-radius:9px;
+font-weight:bold;
+}
+
+.hero{
+min-height:700px;
+display:grid;
+grid-template-columns:1fr 1.05fr;
+align-items:center;
+background:
+radial-gradient(circle at 85% 25%,#0c4b7b 0,transparent 36%),
+linear-gradient(130deg,#020b14,#061c31);
+overflow:hidden;
+}
+
+.hero-texte{
+padding:80px 6% 80px 9%;
+position:relative;
+z-index:2;
+}
+
+.badge{
+display:inline-block;
+padding:8px 13px;
+border:1px solid #2b739d;
+border-radius:50px;
+color:var(--bleu-clair);
+font-size:12px;
+font-weight:bold;
+letter-spacing:1.5px;
+text-transform:uppercase;
+}
+
+.hero h1{
+font-size:clamp(48px,6vw,82px);
+line-height:1;
+margin:22px 0;
+letter-spacing:-2px;
+text-transform:uppercase;
+}
+
+.hero h1 span{
+color:var(--bleu-clair);
+}
+
+.hero-description{
+max-width:680px;
+font-size:20px;
+color:#c4d4df;
+}
+
+.liste-hero{
+display:grid;
+gap:10px;
+margin:28px 0;
+color:#c4d4df;
+}
+
+.actions{
+display:flex;
+flex-wrap:wrap;
+gap:14px;
+margin-top:30px;
+}
+
+.bouton{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+padding:16px 22px;
+border-radius:9px;
+font-size:16px;
+font-weight:bold;
+border:0;
+cursor:pointer;
+}
+
+.bouton-principal{
+background:linear-gradient(180deg,#2ab9ff,#0877d9);
+box-shadow:0 0 28px rgba(21,159,255,.30);
+color:white;
+}
+
+.bouton-secondaire{
+border:1px solid #3279a6;
+background:rgba(2,11,20,.45);
+color:white;
+}
+
+.hero-image{
+height:100%;
+min-height:700px;
+position:relative;
+}
+
+.hero-image::before{
+content:"";
+position:absolute;
+inset:0;
+z-index:1;
+background:linear-gradient(90deg,var(--fond),transparent 30%);
+}
+
+.hero-image img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.bandeau{
+width:min(1180px,92%);
+margin:-42px auto 0;
+position:relative;
+z-index:4;
+display:grid;
+grid-template-columns:repeat(4,1fr);
+background:linear-gradient(180deg,#092740,#041725);
+border:1px solid #236c98;
+border-radius:14px;
+overflow:hidden;
+box-shadow:0 20px 55px rgba(0,0,0,.40);
+}
+
+.bandeau div{
+padding:23px;
+text-align:center;
+border-right:1px solid #1b5278;
+}
+
+.bandeau div:last-child{
+border-right:0;
+}
+
+.bandeau strong{
+display:block;
+color:var(--bleu-clair);
+font-size:18px;
+}
+
+.bandeau span{
+font-size:14px;
+color:var(--texte-secondaire);
+}
+
+.section{
+padding:90px 6%;
+}
+
+.surtitre{
+color:var(--bleu-clair);
+font-size:12px;
+font-weight:bold;
+letter-spacing:2px;
+text-transform:uppercase;
+}
+
+.section h2{
+font-size:clamp(35px,4.5vw,58px);
+line-height:1.08;
+margin:10px 0 35px;
+}
+
+.cartes{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:20px;
+}
+
+.carte{
+padding:28px;
+background:linear-gradient(180deg,#092740,#051522);
+border:1px solid var(--bordure);
+border-radius:15px;
+}
+
+.carte-numero{
+color:var(--bleu-clair);
+font-weight:bold;
+}
+
+.carte h3{
+font-size:24px;
+margin:15px 0 8px;
+}
+
+.carte p{
+color:var(--texte-secondaire);
+}
+
+.realisations{
+background:linear-gradient(180deg,#061a2d,#020b14);
+}
+
+.galerie{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px;
+}
+
+.galerie figure{
+margin:0;
+background:#071d31;
+border:1px solid #1d557a;
+border-radius:13px;
+overflow:hidden;
+}
+
+.galerie img{
+width:100%;
+aspect-ratio:4/3;
+object-fit:cover;
+transition:transform .3s ease;
+}
+
+.galerie figure:hover img{
+transform:scale(1.04);
+}
+
+.galerie figcaption{
+padding:13px;
+color:#c9d8e2;
+}
+
+.pourquoi{
+background:#03101c;
+}
+
+.avantages{
+max-width:950px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:16px 30px;
+}
+
+.avantage{
+padding:17px;
+background:#071e32;
+border-left:3px solid var(--bleu);
+border-radius:7px;
+font-size:18px;
+font-weight:bold;
+}
+
+.zone{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:60px;
+align-items:center;
+}
+
+.villes{
+display:flex;
+flex-wrap:wrap;
+gap:11px;
+}
+
+.villes span{
+padding:10px 14px;
+border:1px solid #28688f;
+background:#08243d;
+border-radius:50px;
+}
+
+.contact{
+display:grid;
+grid-template-columns:.8fr 1.2fr;
+gap:55px;
+background:
+radial-gradient(circle at 10% 20%,#0d4773 0,transparent 30%),
+#04111e;
+}
+
+.contact-intro p{
+color:var(--texte-secondaire);
+font-size:18px;
+}
+
+.coordonnees{
+margin-top:25px;
+display:grid;
+gap:8px;
+}
+
+.coordonnees a{
+color:var(--bleu-clair);
+font-weight:bold;
+font-size:18px;
+}
+
+form{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:16px;
+padding:27px;
+background:#071e32;
+border:1px solid #205e86;
+border-radius:15px;
+}
+
+form label{
+display:grid;
+gap:7px;
+font-weight:bold;
+}
+
+input,
+select,
+textarea{
+width:100%;
+padding:14px;
+border:1px solid #32698d;
+border-radius:8px;
+background:#03111e;
+color:white;
+font:inherit;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+outline:2px solid var(--bleu);
+}
+
+.large{
+grid-column:1/-1;
+}
+
+.consentement{
+display:flex;
+align-items:flex-start;
+gap:10px;
+font-weight:normal;
+color:#c4d5df;
+}
+
+.consentement input{
+width:auto;
+margin-top:6px;
+}
+
+.message-retour{
+padding:14px;
+border:1px solid #2e7ca8;
+border-radius:8px;
+background:#082a45;
+color:var(--bleu-clair);
+font-weight:bold;
+}
+
+.whatsapp{
+position:fixed;
+right:20px;
+bottom:20px;
+z-index:60;
+padding:14px 18px;
+border-radius:50px;
+background:#20bd64;
+color:white;
+font-weight:bold;
+box-shadow:0 12px 35px rgba(0,0,0,.35);
+}
+
+.appel-mobile{
+display:none;
+position:fixed;
+left:20px;
+bottom:20px;
+z-index:60;
+padding:14px 18px;
+border-radius:50px;
+background:var(--bleu);
+color:white;
+font-weight:bold;
+box-shadow:0 12px 35px rgba(0,0,0,.35);
+}
+
+footer{
+display:grid;
+grid-template-columns:1.2fr 1fr 1fr;
+gap:30px;
+padding:38px 6%;
+background:#01070d;
+border-top:1px solid #174668;
+}
+
+footer img{
+width:230px;
+height:65px;
+object-fit:cover;
+object-position:left center;
+}
+
+footer a,
+footer p{
+display:block;
+color:var(--texte-secondaire);
+margin:5px 0;
+}
+
+@media(max-width:900px){
+
+.navigation nav,
+.telephone-haut{
+display:none;
+}
+
+.hero{
+grid-template-columns:1fr;
+}
+
+.hero-image{
+min-height:400px;
+}
+
+.bandeau{
+grid-template-columns:1fr 1fr;
+margin-top:0;
+}
+
+.cartes,
+.galerie{
+grid-template-columns:1fr 1fr;
+}
+
+.zone,
+.contact{
+grid-template-columns:1fr;
+}
+
+}
+
+@media(max-width:600px){
+
+.navigation{
+padding:8px 5%;
+}
+
+.navigation .logo{
+width:190px;
+height:55px;
+}
+
+.hero{
+min-height:auto;
+}
+
+.hero-texte{
+padding:55px 6%;
+}
+
+.hero h1{
+font-size:43px;
+letter-spacing:-1px;
+}
+
+.hero-description{
+font-size:18px;
+}
+
+.hero-image{
+min-height:310px;
+}
+
+.bandeau,
+.cartes,
+.galerie,
+form,
+footer{
+grid-template-columns:1fr;
+}
+
+.bandeau div{
+border-right:0;
+border-bottom:1px solid #1b5278;
+}
+
+.section{
+padding:65px 6%;
+}
+
+.section h2{
+font-size:31px;
+}
+
+.avantages{
+grid-template-columns:1fr;
+}
+
+.avantage{
+font-size:17px;
+}
+
+.large{
+grid-column:auto;
+}
+
+.whatsapp{
+right:12px;
+bottom:14px;
+}
+
+.appel-mobile{
+display:block;
+left:12px;
+bottom:14px;
+}
+
+}
+
+.mini-slider{
+position:relative;
+width:100%;
+height:380px;
+overflow:hidden;
+background:#000;
+border-bottom:1px solid var(--bordure);
+}
+
+.mini-slide{
+position:absolute;
+inset:0;
+opacity:0;
+transition:opacity .9s ease;
+}
+
+.mini-slide.active{
+opacity:1;
+}
+
+.mini-slide img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+}
+
+.mini-slider::after{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(to bottom,rgba(2,11,20,.45) 0%,rgba(2,11,20,0) 35%,rgba(2,11,20,.75) 100%);
+pointer-events:none;
+}
+
+.mini-legende{
+position:absolute;
+left:6%;
+bottom:26px;
+z-index:2;
+color:#fff;
+text-shadow:0 2px 12px rgba(0,0,0,.9);
+}
+
+.mini-legende strong{
+display:block;
+font-size:21px;
+letter-spacing:.3px;
+}
+
+.mini-legende span{
+display:block;
+font-size:14px;
+color:var(--bleu-clair);
+margin-top:3px;
+}
+
+.mini-dots{
+position:absolute;
+right:6%;
+bottom:30px;
+z-index:2;
+display:flex;
+gap:8px;
+}
+
+.mini-dot{
+width:9px;
+height:9px;
+border-radius:50%;
+background:rgba(255,255,255,.35);
+cursor:pointer;
+transition:all .3s ease;
+}
+
+.mini-dot.active{
+background:var(--bleu);
+transform:scale(1.35);
+}
+
+@media(max-width:760px){
+.mini-slider{height:260px;}
+.mini-legende strong{font-size:17px;}
+.mini-legende span{font-size:12px;}
+.mini-dots{bottom:20px;}
+}
 
 </style>
+
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"ConforCam","url":"https://conforcam.fr/","telephone":"+33770470218","email":"contact@conforcam.fr","description":"Installation de caméras de surveillance et alarmes sans abonnement à Marseille et dans les Bouches-du-Rhône.","areaServed":["Marseille","Bouches-du-Rhône","Aix-en-Provence","Aubagne","Allauch","Plan-de-Cuques","Cassis","La Ciotat"]}</script>
 </head>
 
 <body><!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TJMLNLKC" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TJMLNLKC"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
 <header class="navigation">
-<a href="#accueil"><img class="logo" src="assets/logo.jpg" alt="Logo ConforCam"></a>
+
+<a href="#accueil">
+<img class="logo" src="assets/logo.jpg" alt="Logo ConforCam">
+</a>
+
 <nav>
 <a href="#prestations">Prestations</a>
 <a href="#realisations">Réalisations</a>
 <a href="#pourquoi">Pourquoi nous</a>
 <a href="#rappel">Être rappelé</a>
 </nav>
-<a class="telephone-haut" href="tel:+33770470218">07 70 47 02 18</a>
+
+<a class="telephone-haut" href="tel:+33770470218">
+07 70 47 02 18
+</a>
+
 </header>
 
 <main>
 
-<div class="mini-slider" id="mini-slider">
-  <div class="mini-slide active"><img src="assets/photos-installations/1-jacques-bianchi-1.jpg" alt="Installation"></div>
-  <div class="mini-slide"><img src="assets/photos-installations/2-jacques-bianchi-2.jpg" alt="Installation"></div>
-  <div class="mini-slide"><img src="assets/photos-installations/3-jacques-bianchi-3.jpg" alt="Installation"></div>
-  <div class="mini-slide"><img src="assets/photos-installations/4-camera-installation.jpg" alt="Installation"></div>
-  <div class="mini-slide"><img src="assets/photos-installations/5-camera-detail.jpg" alt="Installation"></div>
-  <div class="mini-slide"><img src="assets/photos-installations/6-camera-ceiling.jpg" alt="Installation"></div>
-  <div class="mini-slide"><img src="assets/photos-installations/7-drips-garden.jpg" alt="Installation"></div>
-  <div class="mini-slide"><img src="assets/photos-installations/8-drips-exterior.jpg" alt="Installation"></div>
-  <div class="mini-dots">
-    <span class="mini-dot active" onclick="goToMiniSlide(0)"></span>
-    <span class="mini-dot" onclick="goToMiniSlide(1)"></span>
-    <span class="mini-dot" onclick="goToMiniSlide(2)"></span>
-    <span class="mini-dot" onclick="goToMiniSlide(3)"></span>
-    <span class="mini-dot" onclick="goToMiniSlide(4)"></span>
-    <span class="mini-dot" onclick="goToMiniSlide(5)"></span>
-    <span class="mini-dot" onclick="goToMiniSlide(6)"></span>
-    <span class="mini-dot" onclick="goToMiniSlide(7)"></span>
-  </div>
+<div class="mini-slider" id="diaporama">
+
+<div class="mini-slide active" data-lieu="Jacques Bianchi — Marseille" data-detail="4 caméras filaires + NVR">
+<img src="assets/realisations-photos/01-bianchi-pose.jpg" style="object-position:50% 22%" alt="Installation de caméras chez Jacques Bianchi à Marseille">
 </div>
 
-<script>
-let miniCurrent = 0;
-let miniSlides = document.querySelectorAll('.mini-slide');
-let miniInterval;
+<div class="mini-slide" data-lieu="Jacques Bianchi — Marseille" data-detail="4 caméras filaires + NVR">
+<img loading="lazy" src="assets/realisations-photos/02-bianchi-enseigne.jpg" style="object-position:50% 30%" alt="Pose d'une caméra dôme chez Jacques Bianchi">
+</div>
 
-function showMiniSlide(n) {
-  miniSlides.forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.mini-dot').forEach(d => d.classList.remove('active'));
-  miniSlides[n].classList.add('active');
-  document.querySelectorAll('.mini-dot')[n].classList.add('active');
-}
+<div class="mini-slide" data-lieu="Jacques Bianchi — Marseille" data-detail="Passage de câbles et raccordement">
+<img loading="lazy" src="assets/realisations-photos/03-bianchi-chantier.jpg" style="object-position:50% 62%" alt="Chantier ConforCam à Marseille">
+</div>
 
-function nextMiniSlide() {
-  miniCurrent = (miniCurrent + 1) % miniSlides.length;
-  showMiniSlide(miniCurrent);
-}
+<div class="mini-slide" data-lieu="Jacques Bianchi — Marseille" data-detail="Caméra dôme intérieure">
+<img loading="lazy" src="assets/realisations-photos/04-bianchi-plafond.jpg" style="object-position:50% 42%" alt="Caméra dôme installée au plafond">
+</div>
 
-function goToMiniSlide(n) {
-  miniCurrent = n;
-  showMiniSlide(miniCurrent);
-  clearInterval(miniInterval);
-  miniInterval = setInterval(nextMiniSlide, 2000);
-}
+<div class="mini-slide" data-lieu="Jacques Bianchi — Marseille" data-detail="Intégration discrète en mur pierre">
+<img loading="lazy" src="assets/realisations-photos/05-bianchi-pierre.jpg" style="object-position:50% 52%" alt="Caméra intégrée sur un mur en pierre">
+</div>
 
-miniInterval = setInterval(nextMiniSlide, 2000);
-</script>
+<div class="mini-slide" data-lieu="Jacques Bianchi — Marseille" data-detail="Couverture des angles de la boutique">
+<img loading="lazy" src="assets/realisations-photos/06-bianchi-angle.jpg" style="object-position:50% 45%" alt="Caméra couvrant un angle de la boutique">
+</div>
+
+<div class="mini-slide" data-lieu="Jacques Bianchi — Marseille" data-detail="Caméra intérieure supplémentaire">
+<img loading="lazy" src="assets/realisations-photos/07-bianchi-reolink.jpg" style="object-position:50% 42%" alt="Caméra de surveillance intérieure">
+</div>
+
+<div class="mini-slide" data-lieu="Hôtel Le Drips — Marseille" data-detail="3 caméras extérieures avec panneaux solaires">
+<img loading="lazy" src="assets/realisations-photos/08-drips-solaire.jpg" style="object-position:50% 32%" alt="Caméra extérieure solaire à l'hôtel Le Drips à Marseille">
+</div>
+
+<div class="mini-legende">
+<strong id="diapo-lieu">Jacques Bianchi — Marseille</strong>
+<span id="diapo-detail">4 caméras filaires + NVR</span>
+</div>
+
+<div class="mini-dots" id="diapo-points"></div>
+
+</div>
 
 <section class="hero" id="accueil">
 
@@ -554,19 +1204,51 @@ Mentions légales
 
 <script>
 
-const champPhotos = document.getElementById("photos");
+(function(){
 
-champPhotos.addEventListener("change", function(){
+const diapos = document.querySelectorAll("#diaporama .mini-slide");
+if(!diapos.length) return;
 
-if(this.files.length > 4){
+const points = document.getElementById("diapo-points");
+const lieu = document.getElementById("diapo-lieu");
+const detail = document.getElementById("diapo-detail");
 
-alert("Vous pouvez sélectionner 4 photos maximum.");
+let index = 0;
+let timer = null;
 
-this.value = "";
+diapos.forEach(function(_, i){
+const p = document.createElement("span");
+p.className = "mini-dot" + (i === 0 ? " active" : "");
+p.addEventListener("click", function(){ aller(i); relancer(); });
+points.appendChild(p);
+});
 
+const pastilles = points.querySelectorAll(".mini-dot");
+
+function aller(n){
+diapos[index].classList.remove("active");
+pastilles[index].classList.remove("active");
+index = n;
+diapos[index].classList.add("active");
+pastilles[index].classList.add("active");
+lieu.textContent = diapos[index].dataset.lieu;
+detail.textContent = diapos[index].dataset.detail;
 }
 
+function suivante(){ aller((index + 1) % diapos.length); }
+
+function relancer(){
+clearInterval(timer);
+timer = setInterval(suivante, 2600);
+}
+
+relancer();
+
+document.addEventListener("visibilitychange", function(){
+if(document.hidden){ clearInterval(timer); } else { relancer(); }
 });
+
+})();
 
 </script>
 
