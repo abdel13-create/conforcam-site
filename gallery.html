@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nos Réalisations | ConforCam</title>
+<link rel="canonical" href="https://conforcam.fr/gallery.html">
+<style>
+:root {
+  --fond: #020b14;
+  --fond-clair: #061b2f;
+  --carte: #08243d;
+  --bleu: #159fff;
+  --bleu-clair: #80d3ff;
+  --texte: #f4f9fd;
+  --texte-secondaire: #afc3d1;
+  --bordure: #1d587f;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--fond);
+  color: var(--texte);
+  line-height: 1.6;
+}
+
+header {
+  background: var(--carte);
+  border-bottom: 2px solid var(--bleu);
+  padding: 20px 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+header nav {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header a {
+  color: var(--bleu);
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+header a:hover {
+  color: var(--bleu-clair);
+}
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+h1 {
+  text-align: center;
+  font-size: 48px;
+  margin-bottom: 20px;
+  color: var(--bleu);
+  text-shadow: 0 0 20px rgba(21, 159, 255, 0.3);
+}
+
+.subtitle {
+  text-align: center;
+  font-size: 18px;
+  color: var(--texte-secondaire);
+  margin-bottom: 60px;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 40px;
+  margin-bottom: 60px;
+}
+
+.project {
+  background: var(--carte);
+  border: 2px solid var(--bordure);
+  border-radius: 15px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(21, 159, 255, 0.1);
+}
+
+.project:hover {
+  transform: translateY(-10px);
+  border-color: var(--bleu);
+  box-shadow: 0 20px 50px rgba(21, 159, 255, 0.3);
+}
+
+.project-image {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  display: block;
+}
+
+.project-content {
+  padding: 30px;
+}
+
+.project-title {
+  font-size: 24px;
+  color: var(--bleu);
+  margin-bottom: 12px;
+  font-weight: bold;
+}
+
+.project-location {
+  color: var(--texte-secondaire);
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.project-description {
+  color: var(--texte);
+  font-size: 15px;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.project-specs {
+  background: var(--fond-clair);
+  padding: 15px;
+  border-left: 4px solid var(--bleu);
+  border-radius: 5px;
+  font-size: 14px;
+  color: var(--bleu-clair);
+}
+
+footer {
+  background: var(--carte);
+  border-top: 2px solid var(--bordure);
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--texte-secondaire);
+}
+
+footer a {
+  color: var(--bleu);
+  text-decoration: none;
+  margin: 0 10px;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 32px;
+  }
+
+  .gallery {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+}
+</style>
+</head>
+<body>
+
+<header>
+<nav>
+<a href="index.html">← Retour à l'accueil</a>
+<span style="color: var(--bleu);">Nos Réalisations</span>
+</nav>
+</header>
+
+<main>
+
+<h1>Nos Réalisations</h1>
+<p class="subtitle">Découvrez nos installations de vidéosurveillance et alarmes sans abonnement</p>
+
+<div class="gallery">
+
+<div class="project">
+<img src="assets/realisations/Application.jpg" alt="Jacques Bianchi Marseille - Installation de caméras" class="project-image">
+<div class="project-content">
+<div class="project-title">Jacques Bianchi</div>
+<div class="project-location">Marseille</div>
+<div class="project-description">
+Installation professionnelle de système de vidéosurveillance pour cette boutique de montres prestigieuse. Sécurité discrète et efficace pour protéger les précieuses collections.
+</div>
+<div class="project-specs">
+<strong>Installation :</strong> 4 caméras filaires + NVR
+</div>
+</div>
+</div>
+
+<div class="project">
+<img src="assets/realisations/Boutique.jpg" alt="Jacques Bianchi - Détail installation caméra" class="project-image">
+<div class="project-content">
+<div class="project-title">Jacques Bianchi</div>
+<div class="project-location">Marseille (Détail)</div>
+<div class="project-description">
+Installation précise et esthétique des caméras. Intégration discrète dans l'environnement du commerce pour une surveillance sans compromis sur l'apparence.
+</div>
+<div class="project-specs">
+<strong>Type :</strong> Caméras IP haute définition
+</div>
+</div>
+</div>
+
+<div class="project">
+<img src="assets/realisations/Commerce.jpg" alt="Hôtel Le Drips - Installation caméra panoramique" class="project-image">
+<div class="project-content">
+<div class="project-title">Hôtel Le Drips Bonneveine</div>
+<div class="project-location">Marseille</div>
+<div class="project-description">
+Installation innovante avec panneaux solaires pour l'alimentation. Système autonome et écologique pour la surveillance des espaces extérieurs de cet établissement hôtelier.
+</div>
+<div class="project-specs">
+<strong>Installation :</strong> 3 caméras avec panneaux solaires
+</div>
+</div>
+</div>
+
+<div class="project">
+<img src="assets/realisations/Maison.jpg" alt="Hôtel Le Drips - Caméra dôme panoramique" class="project-image">
+<div class="project-content">
+<div class="project-title">Hôtel Le Drips Bonneveine</div>
+<div class="project-location">Marseille (Détail)</div>
+<div class="project-description">
+Caméra dôme panoramique haute performance. Surveillance 360° pour une couverture complète des zones extérieures et accès de l'établissement.
+</div>
+<div class="project-specs">
+<strong>Type :</strong> Caméra dôme panoramique PoE
+</div>
+</div>
+</div>
+
+</div>
+
+</main>
+
+<footer>
+<p>&copy; 2026 ConforCam. Installation de caméras sans abonnement à Marseille.</p>
+<p>
+<a href="index.html">Accueil</a> |
+<a href="tel:+33770470218">06 69 91 75 00</a> |
+<a href="mailto:contact@conforcam.fr">contact@conforcam.fr</a>
+</p>
+</footer>
+
+</body>
+</html>
