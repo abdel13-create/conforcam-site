@@ -603,97 +603,45 @@ bottom:14px;
 
 }
 
-.mini-slider{
-position:relative;
-width:100%;
-height:380px;
-overflow:hidden;
-background:#000;
-border-bottom:1px solid var(--bordure);
+
+.envoi-choix{
+margin:6px 0 2px;
+color:var(--texte-secondaire);
+font-size:15px;
 }
 
-.mini-slide{
-position:absolute;
-inset:0;
-opacity:0;
-transition:opacity .9s ease;
+.note-form{
+margin-top:10px;
+color:var(--texte-secondaire);
+font-size:13.5px;
 }
 
-.mini-slide.active{
-opacity:1;
+form .bouton{
+justify-content:center;
 }
 
-.mini-slide img{
-width:100%;
-height:100%;
-object-fit:cover;
-display:block;
+.champ-erreur{
+border-color:#e0585f !important;
 }
 
-.mini-slider::after{
-content:"";
-position:absolute;
-inset:0;
-background:linear-gradient(to bottom,rgba(2,11,20,.45) 0%,rgba(2,11,20,0) 35%,rgba(2,11,20,.75) 100%);
-pointer-events:none;
+.message-form{
+margin-top:14px;
+padding:12px 14px;
+border-radius:9px;
+font-size:14.5px;
+display:none;
 }
 
-.mini-legende{
-position:absolute;
-left:6%;
-bottom:26px;
-z-index:2;
-color:#fff;
-text-shadow:0 2px 12px rgba(0,0,0,.9);
-}
-
-.mini-legende strong{
-display:block;
-font-size:21px;
-letter-spacing:.3px;
-}
-
-.mini-legende span{
-display:block;
-font-size:14px;
-color:var(--bleu-clair);
-margin-top:3px;
-}
-
-.mini-dots{
-position:absolute;
-right:6%;
-bottom:30px;
-z-index:2;
-display:flex;
-gap:8px;
-}
-
-.mini-dot{
-width:9px;
-height:9px;
-border-radius:50%;
-background:rgba(255,255,255,.35);
-cursor:pointer;
-transition:all .3s ease;
-}
-
-.mini-dot.active{
-background:var(--bleu);
-transform:scale(1.35);
-}
-
-@media(max-width:760px){
-.mini-slider{height:260px;}
-.mini-legende strong{font-size:17px;}
-.mini-legende span{font-size:12px;}
-.mini-dots{bottom:20px;}
-}
+.message-form.visible{display:block;}
+.message-form.ok{background:rgba(21,159,255,.12);border:1px solid var(--bleu);color:var(--bleu-clair);}
+.message-form.ko{background:rgba(224,88,95,.12);border:1px solid #e0585f;color:#ffb9bd;}
 
 </style>
 
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"ConforCam","url":"https://conforcam.fr/","telephone":"+33770470218","email":"contact@conforcam.fr","description":"Installation de caméras de surveillance et alarmes sans abonnement à Marseille et dans les Bouches-du-Rhône.","areaServed":["Marseille","Bouches-du-Rhône","Aix-en-Provence","Aubagne","Allauch","Plan-de-Cuques","Cassis","La Ciotat"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"ConforCam","url":"https://conforcam.fr/","image":["https://conforcam.fr/assets/logo.jpg","https://conforcam.fr/assets/realisations-photos/01-bianchi-pose.jpg"],"telephone":"+33770470218","email":"contact@conforcam.fr","description":"Installation de caméras de surveillance et alarmes sans abonnement à Marseille et dans les Bouches-du-Rhône.","areaServed":["Marseille","Bouches-du-Rhône","Aix-en-Provence","Aubagne","Allauch","Plan-de-Cuques","Cassis","La Ciotat"]}</script>
+
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Combien coûte l'installation de caméras de surveillance à Marseille ?", "acceptedAnswer": {"@type": "Answer", "text": "Le tarif dépend du nombre de caméras, du type de matériel, de la configuration des lieux et de la complexité de l'installation. ConforCam propose un devis gratuit adapté à votre maison, appartement, commerce ou entreprise."}}, {"@type": "Question", "name": "Peut-on installer des caméras de surveillance sans abonnement ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui. ConforCam installe des systèmes de vidéosurveillance sans abonnement mensuel. Le matériel vous appartient et vous pouvez consulter vos caméras depuis votre smartphone selon l'installation choisie."}}, {"@type": "Question", "name": "Une alarme peut-elle fonctionner sans abonnement ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui. Une alarme sans abonnement peut fonctionner avec des détecteurs, des sirènes et des alertes sur smartphone sans imposer de mensualité de télésurveillance."}}, {"@type": "Question", "name": "Caméra filaire ou sans fil : que choisir ?", "acceptedAnswer": {"@type": "Answer", "text": "Le choix dépend du bâtiment et de vos besoins. Une installation filaire est particulièrement adaptée lorsqu'un câblage est possible, tandis qu'une solution sans fil peut faciliter l'installation dans certaines configurations."}}, {"@type": "Question", "name": "Puis-je voir mes caméras depuis mon téléphone ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui. Selon le système installé, une application mobile permet de consulter les images de vos caméras à distance et de recevoir des notifications."}}, {"@type": "Question", "name": "Installez-vous des caméras dans les commerces et entreprises ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui. ConforCam réalise des installations de vidéosurveillance pour les particuliers, commerces, bureaux et entreprises afin d'adapter la couverture aux accès et aux zones à protéger."}}, {"@type": "Question", "name": "Intervenez-vous uniquement à Marseille ?", "acceptedAnswer": {"@type": "Answer", "text": "Non. ConforCam intervient à Marseille ainsi que dans les Bouches-du-Rhône et, selon le projet, dans d'autres secteurs de la région Provence-Alpes-Côte d'Azur."}}, {"@type": "Question", "name": "Le matériel de vidéosurveillance m'appartient-il ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui. Avec les solutions ConforCam sans abonnement, vous achetez votre équipement : le matériel installé vous appartient."}}]}</script>
 </head>
 
 <body><!-- Google Tag Manager (noscript) -->
@@ -721,49 +669,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </header>
 
 <main>
-
-<div class="mini-slider" id="diaporama">
-
-<div class="mini-slide active" data-lieu="Jacques Bianchi — Marseille" data-detail="4 caméras filaires + NVR">
-<img src="assets/realisations-photos/01-bianchi-pose.jpg" style="object-position:50% 22%" alt="Installation de caméras chez Jacques Bianchi à Marseille">
-</div>
-
-<div class="mini-slide" data-lieu="Jacques Bianchi — Marseille" data-detail="4 caméras filaires + NVR">
-<img loading="lazy" src="assets/realisations-photos/02-bianchi-enseigne.jpg" style="object-position:50% 30%" alt="Pose d'une caméra dôme chez Jacques Bianchi">
-</div>
-
-<div class="mini-slide" data-lieu="Jacques Bianchi — Marseille" data-detail="Passage de câbles et raccordement">
-<img loading="lazy" src="assets/realisations-photos/03-bianchi-chantier.jpg" style="object-position:50% 62%" alt="Chantier ConforCam à Marseille">
-</div>
-
-<div class="mini-slide" data-lieu="Jacques Bianchi — Marseille" data-detail="Caméra dôme intérieure">
-<img loading="lazy" src="assets/realisations-photos/04-bianchi-plafond.jpg" style="object-position:50% 42%" alt="Caméra dôme installée au plafond">
-</div>
-
-<div class="mini-slide" data-lieu="Jacques Bianchi — Marseille" data-detail="Intégration discrète en mur pierre">
-<img loading="lazy" src="assets/realisations-photos/05-bianchi-pierre.jpg" style="object-position:50% 52%" alt="Caméra intégrée sur un mur en pierre">
-</div>
-
-<div class="mini-slide" data-lieu="Jacques Bianchi — Marseille" data-detail="Couverture des angles de la boutique">
-<img loading="lazy" src="assets/realisations-photos/06-bianchi-angle.jpg" style="object-position:50% 45%" alt="Caméra couvrant un angle de la boutique">
-</div>
-
-<div class="mini-slide" data-lieu="Jacques Bianchi — Marseille" data-detail="Caméra intérieure supplémentaire">
-<img loading="lazy" src="assets/realisations-photos/07-bianchi-reolink.jpg" style="object-position:50% 42%" alt="Caméra de surveillance intérieure">
-</div>
-
-<div class="mini-slide" data-lieu="Hôtel Le Drips — Marseille" data-detail="3 caméras extérieures avec panneaux solaires">
-<img loading="lazy" src="assets/realisations-photos/08-drips-solaire.jpg" style="object-position:50% 32%" alt="Caméra extérieure solaire à l'hôtel Le Drips à Marseille">
-</div>
-
-<div class="mini-legende">
-<strong id="diapo-lieu">Jacques Bianchi — Marseille</strong>
-<span id="diapo-detail">4 caméras filaires + NVR</span>
-</div>
-
-<div class="mini-dots" id="diapo-points"></div>
-
-</div>
 
 <section class="hero" id="accueil">
 
@@ -911,40 +816,73 @@ Des installations réelles
 <div class="galerie">
 
 <figure>
-<img loading="lazy" decoding="async" src="assets/realisations/Maison.jpg"
-alt="Protection d'une maison sans abonnement">
+<img src="assets/realisations-photos/01-bianchi-pose.jpg" style="object-position:50% 50%"
+alt="Installation de 4 caméras filaires chez Jacques Bianchi à Marseille">
 <figcaption>
-Protection de votre maison sans abonnement
+<strong>Jacques Bianchi, Marseille</strong><br>4 caméras filaires et enregistreur NVR
 </figcaption>
 </figure>
 
 <figure>
-<img loading="lazy" decoding="async" src="assets/realisations/Boutique.jpg"
-alt="Protection des commerces et professionnels">
+<img src="assets/realisations-photos/02-bianchi-enseigne.jpg" style="object-position:50% 50%"
+alt="Pose d'une caméra dôme dans la boutique Jacques Bianchi à Marseille">
 <figcaption>
-Protection des commerces et professionnels
+<strong>Jacques Bianchi, Marseille</strong><br>Pose d'une caméra dôme en boutique
 </figcaption>
 </figure>
 
 <figure>
-<img loading="lazy" decoding="async" src="assets/realisations/Application.jpg"
-alt="Contrôlez votre système depuis votre smartphone">
+<img loading="lazy" decoding="async" src="assets/realisations-photos/03-bianchi-chantier.jpg" style="object-position:50% 62%"
+alt="Passage des câbles lors d'une installation de vidéosurveillance à Marseille">
 <figcaption>
-Contrôlez votre système depuis votre smartphone
+<strong>Jacques Bianchi, Marseille</strong><br>Passage des câbles et raccordement
 </figcaption>
 </figure>
 
 <figure>
-<img loading="lazy" decoding="async" src="assets/realisations/Commerce.jpg"
-alt="Installation réalisée par ConforCam">
+<img loading="lazy" decoding="async" src="assets/realisations-photos/04-bianchi-plafond.jpg" style="object-position:50% 45%"
+alt="Caméra dôme intérieure installée au plafond à Marseille">
 <figcaption>
-Installation réalisée par ConforCam en région PACA
+<strong>Jacques Bianchi, Marseille</strong><br>Caméra dôme intérieure au plafond
 </figcaption>
 </figure>
+
+<figure>
+<img loading="lazy" decoding="async" src="assets/realisations-photos/05-bianchi-pierre.jpg" style="object-position:50% 50%"
+alt="Caméra de surveillance intégrée sur un mur en pierre à Marseille">
+<figcaption>
+<strong>Jacques Bianchi, Marseille</strong><br>Intégration discrète sur mur en pierre
+</figcaption>
+</figure>
+
+<figure>
+<img loading="lazy" decoding="async" src="assets/realisations-photos/06-bianchi-angle.jpg" style="object-position:50% 45%"
+alt="Caméra couvrant l'angle d'une boutique à Marseille">
+<figcaption>
+<strong>Jacques Bianchi, Marseille</strong><br>Couverture des angles de la boutique
+</figcaption>
+</figure>
+
+<figure>
+<img loading="lazy" decoding="async" src="assets/realisations-photos/07-bianchi-reolink.jpg" style="object-position:50% 45%"
+alt="Caméra de surveillance intérieure supplémentaire à Marseille">
+<figcaption>
+<strong>Jacques Bianchi, Marseille</strong><br>Caméra intérieure supplémentaire
+</figcaption>
+</figure>
+
+<figure>
+<img loading="lazy" decoding="async" src="assets/realisations-photos/08-drips-solaire.jpg" style="object-position:50% 32%"
+alt="Caméra extérieure autonome à panneau solaire à l'hôtel Le Drips à Marseille">
+<figcaption>
+<strong>Hôtel Le Drips, Marseille</strong><br>3 caméras extérieures à panneaux solaires
+</figcaption>
+</figure>
+
 </div>
 
 <div style="text-align:center;margin-top:40px;">
-<a href="gallery.html" class="bouton bouton-principal">Voir toutes nos réalisations</a>
+<a href="#rappel" class="bouton bouton-principal">Demander un devis gratuit</a>
 </div>
 
 </section>
@@ -1041,6 +979,8 @@ La Ciotat, Carry-le-Rouet, Toulon et alentours.
 <article class="carte"><h3><a href="camera-surveillance-marseille/">Caméra de surveillance Marseille</a></h3><p>Installation professionnelle, accès smartphone et enregistrement selon votre projet.</p></article>
 <article class="carte"><h3><a href="alarme-sans-abonnement-marseille/">Alarme sans abonnement Marseille</a></h3><p>Détecteurs, sirènes et alertes mobiles sans mensualité imposée.</p></article>
 <article class="carte"><h3><a href="videosurveillance-marseille/">Vidéosurveillance Marseille</a></h3><p>Solutions pour particuliers, commerces et entreprises.</p></article>
+<article class="carte"><h3><a href="installation-camera-marseille/">Installation caméra Marseille</a></h3><p>Pose, câblage et configuration complète, intérieur comme extérieur.</p></article>
+<article class="carte"><h3><a href="camera-commerce-marseille/">Caméra pour commerce Marseille</a></h3><p>Entrée, caisse, réserve et accès : une couverture pensée pour les commerçants.</p></article>
 </div>
 <p style="margin-top:24px"><a class="bouton bouton-secondaire" href="blog/">Conseils sécurité & blog</a></p>
 </section>
@@ -1123,25 +1063,51 @@ contact@conforcam.fr
 
 </div>
 
-<div style="text-align:center;">
+<form id="form-devis" novalidate>
 
-<p style="font-size:18px;margin:20px 0;">
-Contactez-nous directement via WhatsApp pour obtenir votre devis gratuit.
-</p>
+<label>
+Nom et prénom *
+<input type="text" name="nom" required autocomplete="name">
+</label>
 
-<a
-href="https://wa.me/33770470218?text=Bonjour%20ConforCam%2C%20je%20souhaite%20un%20devis%20pour%20l%27installation%20de%20cam%C3%A9ras."
-target="_blank"
-rel="noopener"
-class="bouton bouton-principal large"
-style="display:inline-block;padding:15px 30px;margin-top:20px;"
->
+<label>
+Téléphone *
+<input type="tel" name="telephone" required autocomplete="tel">
+</label>
 
-Demander un devis par WhatsApp
+<label>
+Ville *
+<input type="text" name="ville" required autocomplete="address-level2">
+</label>
 
-</a>
+<label>
+Type de bien
+<select name="bien">
+<option>Maison</option>
+<option>Appartement</option>
+<option>Commerce</option>
+<option>Hôtel</option>
+<option>Bureau</option>
+<option>Entrepôt</option>
+<option>Copropriété</option>
+<option>Autre</option>
+</select>
+</label>
 
-</div>
+<label class="large">
+Votre projet
+<textarea name="projet" rows="4" placeholder="Nombre de caméras envisagé, intérieur ou extérieur, contraintes particulières..."></textarea>
+</label>
+
+<p class="envoi-choix large">Envoyez votre demande&nbsp;:</p>
+
+<button type="button" class="bouton bouton-principal" id="envoi-whatsapp">Par WhatsApp</button>
+
+<button type="button" class="bouton bouton-secondaire" id="envoi-mail">Par e-mail</button>
+
+<p class="note-form large">Réponse sous 24&nbsp;h ouvrées. Devis et déplacement gratuits sur Marseille et alentours.</p>
+
+</form>
 
 </section>
 
@@ -1202,50 +1168,73 @@ Mentions légales
 
 </footer>
 
+
+
+
 <script>
 
 (function(){
 
-const diapos = document.querySelectorAll("#diaporama .mini-slide");
-if(!diapos.length) return;
+const f = document.getElementById("form-devis");
+if(!f) return;
 
-const points = document.getElementById("diapo-points");
-const lieu = document.getElementById("diapo-lieu");
-const detail = document.getElementById("diapo-detail");
+const msg = document.createElement("p");
+msg.className = "message-form large";
+f.appendChild(msg);
 
-let index = 0;
-let timer = null;
+function valeur(n){
+const c = f.elements[n];
+return c ? c.value.trim() : "";
+}
 
-diapos.forEach(function(_, i){
-const p = document.createElement("span");
-p.className = "mini-dot" + (i === 0 ? " active" : "");
-p.addEventListener("click", function(){ aller(i); relancer(); });
-points.appendChild(p);
+function verifier(){
+let ok = true;
+["nom","telephone","ville"].forEach(function(n){
+const c = f.elements[n];
+if(!c.value.trim()){ c.classList.add("champ-erreur"); ok = false; }
+else { c.classList.remove("champ-erreur"); }
+});
+if(!ok){
+msg.className = "message-form large visible ko";
+msg.textContent = "Merci de renseigner votre nom, votre téléphone et votre ville.";
+}
+return ok;
+}
+
+function texte(){
+const l = [];
+l.push("Bonjour ConforCam, je souhaite un devis.");
+l.push("");
+l.push("Nom : " + valeur("nom"));
+l.push("Téléphone : " + valeur("telephone"));
+l.push("Ville : " + valeur("ville"));
+l.push("Type de bien : " + valeur("bien"));
+const p = valeur("projet");
+if(p) l.push("Projet : " + p);
+return l.join("\n");
+}
+
+function confirme(){
+msg.className = "message-form large visible ok";
+msg.textContent = "Votre demande est prête. Il ne reste plus qu'à l'envoyer dans la fenêtre qui vient de s'ouvrir.";
+}
+
+document.getElementById("envoi-whatsapp").addEventListener("click", function(){
+if(!verifier()) return;
+window.open("https://wa.me/33770470218?text=" + encodeURIComponent(texte()), "_blank", "noopener");
+confirme();
 });
 
-const pastilles = points.querySelectorAll(".mini-dot");
+document.getElementById("envoi-mail").addEventListener("click", function(){
+if(!verifier()) return;
+window.location.href = "mailto:contact@conforcam.fr"
++ "?subject=" + encodeURIComponent("Demande de devis - " + valeur("ville"))
++ "&body=" + encodeURIComponent(texte());
+confirme();
+});
 
-function aller(n){
-diapos[index].classList.remove("active");
-pastilles[index].classList.remove("active");
-index = n;
-diapos[index].classList.add("active");
-pastilles[index].classList.add("active");
-lieu.textContent = diapos[index].dataset.lieu;
-detail.textContent = diapos[index].dataset.detail;
-}
-
-function suivante(){ aller((index + 1) % diapos.length); }
-
-function relancer(){
-clearInterval(timer);
-timer = setInterval(suivante, 2600);
-}
-
-relancer();
-
-document.addEventListener("visibilitychange", function(){
-if(document.hidden){ clearInterval(timer); } else { relancer(); }
+f.addEventListener("input", function(e){
+e.target.classList.remove("champ-erreur");
 });
 
 })();
