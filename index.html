@@ -400,41 +400,6 @@ color:var(--texte-secondaire);
 background:linear-gradient(180deg,#061a2d,#020b14);
 }
 
-.diaporama{
-display:block;
-width:min(100%,420px);
-margin:0 auto;
-}
-
-.diaporama figure{
-display:none;
-margin:0;
-background:#071d31;
-border:1px solid #1d557a;
-border-radius:13px;
-overflow:hidden;
-}
-
-.diaporama figure.actif{
-display:block;
-animation:fondu .6s ease;
-}
-
-.diaporama img{
-width:100%;
-aspect-ratio:4/3;
-object-fit:cover;
-}
-
-.diaporama figure:hover img{
-transform:none;
-}
-
-@keyframes fondu{
-from{opacity:0;}
-to{opacity:1;}
-}
-
 .galerie{
 display:grid;
 grid-template-columns:repeat(3,1fr);
@@ -976,7 +941,7 @@ Nos réalisations
 Des installations réelles
 </h2>
 
-<div class="galerie diaporama" id="diaporama">
+<div class="galerie">
 
 <figure>
 <img src="assets/realisations-photos/01-bianchi-pose.jpg" style="object-position:50% 50%"
@@ -1478,21 +1443,6 @@ e.target.classList.remove("champ-erreur");
 
 </script>
 
-<script>
-(function(){
-var cadre=document.getElementById('diaporama');
-if(!cadre)return;
-var slides=cadre.querySelectorAll('figure');
-if(slides.length<2)return;
-var i=0;
-slides[0].classList.add('actif');
-setInterval(function(){
-slides[i].classList.remove('actif');
-i=(i+1)%slides.length;
-slides[i].classList.add('actif');
-},3000);
-})();
-</script>
 </body>
 
 </html>
