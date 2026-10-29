@@ -435,6 +435,29 @@ object-fit:cover;
 transform:none;
 }
 
+.diaporama-fleche{
+position:absolute;
+top:38%;
+z-index:3;
+width:44px;
+height:44px;
+border:0;
+border-radius:50%;
+background:rgba(2,11,20,.55);
+color:#fff;
+font-size:26px;
+line-height:44px;
+text-align:center;
+cursor:pointer;
+}
+
+.diaporama-fleche:hover{
+background:rgba(21,159,255,.45);
+}
+
+.diaporama-prev{left:10px;}
+.diaporama-next{right:10px;}
+
 @keyframes fondu{
 from{opacity:0;}
 to{opacity:1;}
@@ -981,7 +1004,7 @@ Nos réalisations
 Des installations réelles
 </h2>
 
-<div class="galerie diaporama" id="diaporama" style="display:block;width:420px;max-width:100%;margin:0 auto;">
+<div class="galerie diaporama" id="diaporama" style="display:block;width:480px;max-width:100%;margin:0 auto;position:relative;">
 
 <figure>
 <img src="assets/realisations-photos/01-bianchi-pose.jpg" style="object-position:50% 50%"
@@ -1047,6 +1070,9 @@ alt="Caméra extérieure autonome à panneau solaire à l'hôtel Le Drips à Mar
 </figcaption>
 </figure>
 
+
+<button type="button" class="diaporama-fleche diaporama-prev" aria-label="Photo précédente">&#8249;</button>
+<button type="button" class="diaporama-fleche diaporama-next" aria-label="Photo suivante">&#8250;</button>
 </div>
 
 <div style="text-align:center;margin-top:40px;">
@@ -1489,13 +1515,17 @@ var cadre=document.getElementById('diaporama');
 if(!cadre)return;
 var slides=cadre.querySelectorAll('figure');
 if(slides.length<2)return;
-var i=0;
-slides[0].classList.add('actif');
-setInterval(function(){
+var i=0, timer=null;
+function montre(n){
 slides[i].classList.remove('actif');
-i=(i+1)%slides.length;
+i=(n+slides.length)%slides.length;
 slides[i].classList.add('actif');
-},3000);
+}
+function lance(){ clearInterval(timer); timer=setInterval(function(){ montre(i+1); },3000); }
+slides[0].classList.add('actif');
+lance();
+cadre.querySelector('.diaporama-prev').addEventListener('click',function(){ montre(i-1); lance(); });
+cadre.querySelector('.diaporama-next').addEventListener('click',function(){ montre(i+1); lance(); });
 })();
 </script>
 </body>
