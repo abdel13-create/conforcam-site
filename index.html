@@ -435,6 +435,61 @@ object-fit:cover;
 transform:none;
 }
 
+.galerie.diaporama figure{
+border:1px solid transparent;
+background:
+linear-gradient(180deg,#071d31,#04111f) padding-box,
+linear-gradient(135deg,#80d3ff,#1d587f 45%,#159fff) border-box;
+border-radius:16px;
+box-shadow:0 0 45px rgba(21,159,255,.22),0 20px 50px rgba(0,0,0,.35);
+}
+
+.galerie.diaporama figcaption{
+padding:16px 18px 18px;
+background:rgba(2,11,20,.55);
+color:#f4f9fd;
+border-top:1px solid #174566;
+line-height:1.5;
+}
+
+.galerie.diaporama figcaption strong{
+color:var(--bleu-clair);
+font-size:15px;
+}
+
+.diaporama-compteur{
+float:right;
+padding:4px 11px;
+border:1px solid #2b739d;
+border-radius:50px;
+color:var(--bleu-clair);
+font-size:12px;
+font-weight:bold;
+letter-spacing:1px;
+}
+
+.diaporama-barre{
+height:3px;
+background:#0d2a42;
+overflow:hidden;
+}
+
+.diaporama-barre span{
+display:block;
+height:100%;
+width:0;
+background:linear-gradient(90deg,#159fff,#80d3ff);
+}
+
+.diaporama-barre span.go{
+animation:remplit 3s linear forwards;
+}
+
+@keyframes remplit{
+from{width:0;}
+to{width:100%;}
+}
+
 .diaporama-fleche{
 position:absolute;
 top:38%;
@@ -1010,6 +1065,7 @@ Des installations réelles
 <img src="assets/realisations-photos/01-bianchi-pose.jpg" style="object-position:50% 50%"
 alt="Installation de 4 caméras filaires chez Jacques Bianchi à Marseille">
 <figcaption>
+<span class="diaporama-compteur"></span>
 <strong>Jacques Bianchi, Marseille</strong><br>4 caméras filaires et enregistreur NVR
 </figcaption>
 </figure>
@@ -1018,6 +1074,7 @@ alt="Installation de 4 caméras filaires chez Jacques Bianchi à Marseille">
 <img src="assets/realisations-photos/02-bianchi-enseigne.jpg" style="object-position:50% 50%"
 alt="Pose d'une caméra dôme dans la boutique Jacques Bianchi à Marseille">
 <figcaption>
+<span class="diaporama-compteur"></span>
 <strong>Jacques Bianchi, Marseille</strong><br>Pose d'une caméra dôme en boutique
 </figcaption>
 </figure>
@@ -1026,6 +1083,7 @@ alt="Pose d'une caméra dôme dans la boutique Jacques Bianchi à Marseille">
 <img loading="lazy" decoding="async" src="assets/realisations-photos/03-bianchi-chantier.jpg" style="object-position:50% 62%"
 alt="Passage des câbles lors d'une installation de vidéosurveillance à Marseille">
 <figcaption>
+<span class="diaporama-compteur"></span>
 <strong>Jacques Bianchi, Marseille</strong><br>Passage des câbles et raccordement
 </figcaption>
 </figure>
@@ -1034,6 +1092,7 @@ alt="Passage des câbles lors d'une installation de vidéosurveillance à Marsei
 <img loading="lazy" decoding="async" src="assets/realisations-photos/04-bianchi-plafond.jpg" style="object-position:50% 45%"
 alt="Caméra dôme intérieure installée au plafond à Marseille">
 <figcaption>
+<span class="diaporama-compteur"></span>
 <strong>Jacques Bianchi, Marseille</strong><br>Caméra dôme intérieure au plafond
 </figcaption>
 </figure>
@@ -1042,6 +1101,7 @@ alt="Caméra dôme intérieure installée au plafond à Marseille">
 <img loading="lazy" decoding="async" src="assets/realisations-photos/05-bianchi-pierre.jpg" style="object-position:50% 50%"
 alt="Caméra de surveillance intégrée sur un mur en pierre à Marseille">
 <figcaption>
+<span class="diaporama-compteur"></span>
 <strong>Jacques Bianchi, Marseille</strong><br>Intégration discrète sur mur en pierre
 </figcaption>
 </figure>
@@ -1050,6 +1110,7 @@ alt="Caméra de surveillance intégrée sur un mur en pierre à Marseille">
 <img loading="lazy" decoding="async" src="assets/realisations-photos/06-bianchi-angle.jpg" style="object-position:50% 45%"
 alt="Caméra couvrant l'angle d'une boutique à Marseille">
 <figcaption>
+<span class="diaporama-compteur"></span>
 <strong>Jacques Bianchi, Marseille</strong><br>Couverture des angles de la boutique
 </figcaption>
 </figure>
@@ -1058,6 +1119,7 @@ alt="Caméra couvrant l'angle d'une boutique à Marseille">
 <img loading="lazy" decoding="async" src="assets/realisations-photos/07-bianchi-reolink.jpg" style="object-position:50% 45%"
 alt="Caméra de surveillance intérieure supplémentaire à Marseille">
 <figcaption>
+<span class="diaporama-compteur"></span>
 <strong>Jacques Bianchi, Marseille</strong><br>Caméra intérieure supplémentaire
 </figcaption>
 </figure>
@@ -1066,11 +1128,13 @@ alt="Caméra de surveillance intérieure supplémentaire à Marseille">
 <img loading="lazy" decoding="async" src="assets/realisations-photos/08-drips-solaire.jpg" style="object-position:50% 32%"
 alt="Caméra extérieure autonome à panneau solaire à l'hôtel Le Drips à Marseille">
 <figcaption>
+<span class="diaporama-compteur"></span>
 <strong>Hôtel Le Drips, Marseille</strong><br>3 caméras extérieures à panneaux solaires
 </figcaption>
 </figure>
 
 
+<div class="diaporama-barre"><span></span></div>
 <button type="button" class="diaporama-fleche diaporama-prev" aria-label="Photo précédente">&#8249;</button>
 <button type="button" class="diaporama-fleche diaporama-next" aria-label="Photo suivante">&#8250;</button>
 </div>
@@ -1515,14 +1579,21 @@ var cadre=document.getElementById('diaporama');
 if(!cadre)return;
 var slides=cadre.querySelectorAll('figure');
 if(slides.length<2)return;
+var barre=cadre.querySelector('.diaporama-barre span');
 var i=0, timer=null;
+function pad(n){ return (n<10?'0':'')+n; }
 function montre(n){
 slides[i].classList.remove('actif');
 i=(n+slides.length)%slides.length;
 slides[i].classList.add('actif');
+var c=slides[i].querySelector('.diaporama-compteur');
+if(c) c.textContent=pad(i+1)+' / '+pad(slides.length);
+barre.classList.remove('go');
+void barre.offsetWidth;
+barre.classList.add('go');
 }
 function lance(){ clearInterval(timer); timer=setInterval(function(){ montre(i+1); },3000); }
-slides[0].classList.add('actif');
+montre(0);
 lance();
 cadre.querySelector('.diaporama-prev').addEventListener('click',function(){ montre(i-1); lance(); });
 cadre.querySelector('.diaporama-next').addEventListener('click',function(){ montre(i+1); lance(); });
