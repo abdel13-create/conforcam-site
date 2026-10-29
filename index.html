@@ -400,6 +400,80 @@ color:var(--texte-secondaire);
 background:linear-gradient(180deg,#061a2d,#020b14);
 }
 
+.realisations-grille{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px;
+}
+
+.realisations-grille figure{
+position:relative;
+margin:0;
+overflow:hidden;
+border:1px solid #1d557a;
+border-radius:15px;
+background:#071d31;
+}
+
+.realisations-grille .real-grand{
+grid-column:span 2;
+grid-row:span 2;
+}
+
+.realisations-grille img{
+width:100%;
+height:100%;
+min-height:240px;
+object-fit:cover;
+transition:transform .5s ease;
+}
+
+.realisations-grille figure:hover img{
+transform:scale(1.04);
+}
+
+.realisations-grille figcaption{
+position:absolute;
+left:0;
+right:0;
+bottom:0;
+display:flex;
+flex-direction:column;
+gap:3px;
+padding:50px 18px 16px;
+background:linear-gradient(180deg,rgba(2,11,20,0),rgba(2,11,20,.92));
+}
+
+.real-lieu{
+color:var(--bleu-clair);
+font-size:13px;
+font-weight:bold;
+letter-spacing:.3px;
+}
+
+.real-type{
+color:var(--texte);
+font-size:16px;
+font-weight:bold;
+}
+
+.real-grand .real-type{
+font-size:20px;
+}
+
+@media(max-width:900px){
+.realisations-grille{
+grid-template-columns:1fr;
+}
+.realisations-grille .real-grand{
+grid-column:auto;
+grid-row:auto;
+}
+.realisations-grille img{
+min-height:220px;
+}
+}
+
 .galerie{
 display:grid;
 grid-template-columns:repeat(3,1fr);
@@ -941,45 +1015,23 @@ Nos réalisations
 Des installations réelles
 </h2>
 
-<div class="galerie">
+<div class="realisations-grille">
 
-<figure>
-<img src="assets/realisations-photos/01-bianchi-pose.jpg" style="object-position:50% 50%"
-alt="Installation de 4 caméras filaires chez Jacques Bianchi à Marseille">
+<figure class="real-grand">
+<img src="assets/realisations-photos/01-bianchi-pose.jpg" style="object-position:50% 40%"
+alt="Technicien ConforCam installant une caméra dôme dans la boutique Jacques Bianchi à Marseille">
 <figcaption>
-<strong>Jacques Bianchi, Marseille</strong><br>4 caméras filaires et enregistreur NVR
+<span class="real-lieu">Boutique Jacques Bianchi, Marseille</span>
+<span class="real-type">Caméra dôme en boutique</span>
 </figcaption>
 </figure>
 
 <figure>
-<img src="assets/realisations-photos/02-bianchi-enseigne.jpg" style="object-position:50% 50%"
-alt="Pose d'une caméra dôme dans la boutique Jacques Bianchi à Marseille">
+<img loading="lazy" decoding="async" src="assets/realisations-photos/02-bianchi-enseigne.jpg" style="object-position:50% 50%"
+alt="Caméra dôme installée dans la boutique Jacques Bianchi à Marseille">
 <figcaption>
-<strong>Jacques Bianchi, Marseille</strong><br>Pose d'une caméra dôme en boutique
-</figcaption>
-</figure>
-
-<figure>
-<img loading="lazy" decoding="async" src="assets/realisations-photos/03-bianchi-chantier.jpg" style="object-position:50% 62%"
-alt="Passage des câbles lors d'une installation de vidéosurveillance à Marseille">
-<figcaption>
-<strong>Jacques Bianchi, Marseille</strong><br>Passage des câbles et raccordement
-</figcaption>
-</figure>
-
-<figure>
-<img loading="lazy" decoding="async" src="assets/realisations-photos/04-bianchi-plafond.jpg" style="object-position:50% 45%"
-alt="Caméra dôme intérieure installée au plafond à Marseille">
-<figcaption>
-<strong>Jacques Bianchi, Marseille</strong><br>Caméra dôme intérieure au plafond
-</figcaption>
-</figure>
-
-<figure>
-<img loading="lazy" decoding="async" src="assets/realisations-photos/05-bianchi-pierre.jpg" style="object-position:50% 50%"
-alt="Caméra de surveillance intégrée sur un mur en pierre à Marseille">
-<figcaption>
-<strong>Jacques Bianchi, Marseille</strong><br>Intégration discrète sur mur en pierre
+<span class="real-lieu">Boutique Jacques Bianchi, Marseille</span>
+<span class="real-type">Pose en boutique</span>
 </figcaption>
 </figure>
 
@@ -987,15 +1039,35 @@ alt="Caméra de surveillance intégrée sur un mur en pierre à Marseille">
 <img loading="lazy" decoding="async" src="assets/realisations-photos/06-bianchi-angle.jpg" style="object-position:50% 45%"
 alt="Caméra couvrant l'angle d'une boutique à Marseille">
 <figcaption>
-<strong>Jacques Bianchi, Marseille</strong><br>Couverture des angles de la boutique
+<span class="real-lieu">Boutique Jacques Bianchi, Marseille</span>
+<span class="real-type">Couverture des angles</span>
+</figcaption>
+</figure>
+
+<figure>
+<img loading="lazy" decoding="async" src="assets/realisations-photos/04-bianchi-plafond.jpg" style="object-position:50% 45%"
+alt="Caméra dôme intérieure installée au plafond à Marseille">
+<figcaption>
+<span class="real-lieu">Boutique Jacques Bianchi, Marseille</span>
+<span class="real-type">Caméra dôme au plafond</span>
+</figcaption>
+</figure>
+
+<figure>
+<img loading="lazy" decoding="async" src="assets/realisations-photos/05-bianchi-pierre.jpg" style="object-position:50% 50%"
+alt="Caméra intégrée sur un mur en pierre à Marseille">
+<figcaption>
+<span class="real-lieu">Boutique Jacques Bianchi, Marseille</span>
+<span class="real-type">Intégration discrète</span>
 </figcaption>
 </figure>
 
 <figure>
 <img loading="lazy" decoding="async" src="assets/realisations-photos/07-bianchi-reolink.jpg" style="object-position:50% 45%"
-alt="Caméra de surveillance intérieure supplémentaire à Marseille">
+alt="Caméra de surveillance intérieure à Marseille">
 <figcaption>
-<strong>Jacques Bianchi, Marseille</strong><br>Caméra intérieure supplémentaire
+<span class="real-lieu">Boutique Jacques Bianchi, Marseille</span>
+<span class="real-type">Caméra intérieure</span>
 </figcaption>
 </figure>
 
@@ -1003,7 +1075,8 @@ alt="Caméra de surveillance intérieure supplémentaire à Marseille">
 <img loading="lazy" decoding="async" src="assets/realisations-photos/08-drips-solaire.jpg" style="object-position:50% 32%"
 alt="Caméra extérieure autonome à panneau solaire à l'hôtel Le Drips à Marseille">
 <figcaption>
-<strong>Hôtel Le Drips, Marseille</strong><br>3 caméras extérieures à panneaux solaires
+<span class="real-lieu">Hôtel Le Drips, Marseille</span>
+<span class="real-type">Caméras extérieures solaires</span>
 </figcaption>
 </figure>
 
