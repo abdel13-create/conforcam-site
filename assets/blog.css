@@ -48,10 +48,7 @@ header {
 }
 
 header img {
-  width: 230px;
-  height: 62px;
-  object-fit: cover;
-  object-position: left center;
+  width:auto;height:54px;object-fit:contain;
 }
 
 nav {

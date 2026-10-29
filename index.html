@@ -74,10 +74,9 @@ border-bottom:1px solid #174566;
 }
 
 .navigation .logo{
-width:230px;
-height:62px;
-object-fit:cover;
-object-position:left center;
+width:auto;
+height:54px;
+object-fit:contain;
 }
 
 .navigation nav{
@@ -236,6 +235,118 @@ font-size:18px;
 .bandeau span{
 font-size:14px;
 color:var(--texte-secondaire);
+}
+
+.bandeau span a{
+color:var(--bleu-clair);
+font-weight:bold;
+}
+
+.note-google{
+display:inline-flex;
+align-items:center;
+gap:13px;
+margin-top:28px;
+padding:12px 18px;
+background:rgba(8,36,61,.75);
+border:1px solid var(--bordure);
+border-radius:11px;
+}
+
+.note-google:hover{
+border-color:var(--bleu);
+}
+
+.note-chiffre{
+font-size:30px;
+font-weight:bold;
+color:var(--bleu-clair);
+line-height:1;
+}
+
+.note-detail{
+display:grid;
+gap:3px;
+}
+
+.note-etoiles{
+color:#ffc93c;
+font-size:15px;
+letter-spacing:2px;
+line-height:1;
+}
+
+.note-texte{
+font-size:13px;
+color:var(--texte-secondaire);
+}
+
+.avis{
+background:linear-gradient(180deg,#03101c,#020b14);
+}
+
+.avis-entete{
+display:flex;
+align-items:center;
+gap:16px;
+flex-wrap:wrap;
+margin-bottom:32px;
+padding:19px 23px;
+background:linear-gradient(180deg,#092740,#051522);
+border:1px solid var(--bordure);
+border-radius:13px;
+}
+
+.avis-entete .note-chiffre{
+font-size:38px;
+}
+
+.avis-lien{
+margin-left:auto;
+color:var(--bleu-clair);
+font-weight:bold;
+font-size:14px;
+}
+
+.avis-lien:hover{
+color:var(--bleu);
+}
+
+.carte-avis{
+display:flex;
+flex-direction:column;
+padding:25px;
+background:linear-gradient(180deg,#092740,#051522);
+border:1px solid var(--bordure);
+border-radius:15px;
+}
+
+.carte-avis .note-etoiles{
+margin-bottom:13px;
+font-size:16px;
+}
+
+.carte-avis p{
+flex:1;
+margin:0 0 16px;
+color:#d7e4ed;
+font-size:15px;
+line-height:1.6;
+font-style:italic;
+}
+
+.avis-auteur{
+color:var(--bleu-clair);
+font-weight:bold;
+font-size:14px;
+}
+
+.avis-source{
+display:block;
+margin-top:3px;
+color:var(--texte-secondaire);
+font-size:12px;
+font-weight:normal;
 }
 
 .section{
@@ -480,10 +591,9 @@ border-top:1px solid #174668;
 }
 
 footer img{
-width:230px;
-height:65px;
-object-fit:cover;
-object-position:left center;
+width:auto;
+height:58px;
+object-fit:contain;
 }
 
 footer a,
@@ -532,8 +642,9 @@ padding:8px 5%;
 }
 
 .navigation .logo{
-width:190px;
-height:55px;
+width:auto;
+height:42px;
+object-fit:contain;
 }
 
 .hero{
@@ -639,7 +750,7 @@ display:none;
 </style>
 
 
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"ConforCam","url":"https://conforcam.fr/","image":["https://conforcam.fr/assets/logo.jpg","https://conforcam.fr/assets/realisations-photos/01-bianchi-pose.jpg"],"telephone":"+33770470218","email":"contact@conforcam.fr","description":"Installation de caméras de surveillance et alarmes sans abonnement à Marseille et dans les Bouches-du-Rhône.","areaServed":["Marseille","Bouches-du-Rhône","Aix-en-Provence","Aubagne","Allauch","Plan-de-Cuques","Cassis","La Ciotat"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"ConforCam","url":"https://conforcam.fr/","image":["https://conforcam.fr/assets/logo.png","https://conforcam.fr/assets/realisations-photos/01-bianchi-pose.jpg"],"telephone":"+33770470218","email":"contact@conforcam.fr","description":"Installation de caméras de surveillance et alarmes sans abonnement à Marseille et dans les Bouches-du-Rhône.","areaServed":["Marseille","Bouches-du-Rhône","Aix-en-Provence","Aubagne","Allauch","Plan-de-Cuques","Cassis","La Ciotat"],"aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"23","bestRating":"5"}}</script>
 
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Combien coûte l'installation de caméras de surveillance à Marseille ?", "acceptedAnswer": {"@type": "Answer", "text": "Le tarif dépend du nombre de caméras, du type de matériel, de la configuration des lieux et de la complexité de l'installation. ConforCam propose un devis gratuit adapté à votre maison, appartement, commerce ou entreprise."}}, {"@type": "Question", "name": "Peut-on installer des caméras de surveillance sans abonnement ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui. ConforCam installe des systèmes de vidéosurveillance sans abonnement mensuel. Le matériel vous appartient et vous pouvez consulter vos caméras depuis votre smartphone selon l'installation choisie."}}, {"@type": "Question", "name": "Une alarme peut-elle fonctionner sans abonnement ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui. Une alarme sans abonnement peut fonctionner avec des détecteurs, des sirènes et des alertes sur smartphone sans imposer de mensualité de télésurveillance."}}, {"@type": "Question", "name": "Caméra filaire ou sans fil : que choisir ?", "acceptedAnswer": {"@type": "Answer", "text": "Le choix dépend du bâtiment et de vos besoins. Une installation filaire est particulièrement adaptée lorsqu'un câblage est possible, tandis qu'une solution sans fil peut faciliter l'installation dans certaines configurations."}}, {"@type": "Question", "name": "Puis-je voir mes caméras depuis mon téléphone ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui. Selon le système installé, une application mobile permet de consulter les images de vos caméras à distance et de recevoir des notifications."}}, {"@type": "Question", "name": "Installez-vous des caméras dans les commerces et entreprises ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui. ConforCam réalise des installations de vidéosurveillance pour les particuliers, commerces, bureaux et entreprises afin d'adapter la couverture aux accès et aux zones à protéger."}}, {"@type": "Question", "name": "Intervenez-vous uniquement à Marseille ?", "acceptedAnswer": {"@type": "Answer", "text": "Non. ConforCam intervient à Marseille ainsi que dans les Bouches-du-Rhône et, selon le projet, dans d'autres secteurs de la région Provence-Alpes-Côte d'Azur."}}, {"@type": "Question", "name": "Le matériel de vidéosurveillance m'appartient-il ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui. Avec les solutions ConforCam sans abonnement, vous achetez votre équipement : le matériel installé vous appartient."}}]}</script>
 </head>
@@ -652,13 +763,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <header class="navigation">
 
 <a href="#accueil">
-<img class="logo" src="assets/logo.jpg" alt="Logo ConforCam">
+<img class="logo" src="assets/logo.png" alt="ConforCam - caméras et alarmes sans abonnement à Marseille">
 </a>
 
 <nav>
 <a href="#prestations">Prestations</a>
 <a href="/articles/">Articles</a>
 <a href="#realisations">Réalisations</a>
+<a href="#avis">Avis</a>
 <a href="#pourquoi">Pourquoi nous</a>
 <a href="#rappel">Être rappelé</a>
 </nav>
@@ -712,13 +824,21 @@ Appeler maintenant
 
 </div>
 
+<a class="note-google" href="https://www.google.com/maps/place/Conforcam/@43.5407656,5.0218248,9z/data=!4m8!3m7!1s0x402fc5041b7dfe2b:0x46860d108f54d2e5!8m2!3d43.5407656!4d5.0218248!9m1!1b1!16s%2Fg%2F11zxf0t028" target="_blank" rel="noopener">
+<span class="note-chiffre">5,0</span>
+<span class="note-detail">
+<span class="note-etoiles">★★★★★</span>
+<span class="note-texte">23 avis Google</span>
+</span>
+</a>
+
 </div>
 
 <div class="hero-image">
 
 <img
-src="assets/hero.jpg"
-alt="Caméras et alarme ConforCam"
+src="assets/realisations-photos/01-bianchi-pose.jpg"
+alt="Technicien ConforCam installant une caméra dôme dans la boutique Jacques Bianchi à Marseille"
 >
 
 </div>
@@ -733,18 +853,18 @@ alt="Caméras et alarme ConforCam"
 </div>
 
 <div>
+<strong>Devis gratuit sous 48h</strong>
+<span><a href="tel:+33770470218">07 70 47 02 18</a></span>
+</div>
+
+<div>
+<strong>Tarif fixe</strong>
+<span>Le prix du devis est le prix final</span>
+</div>
+
+<div>
 <strong>Garantie 2 ans</strong>
 <span>Garantie du matériel</span>
-</div>
-
-<div>
-<strong>Devis gratuit</strong>
-<span>Étude personnalisée</span>
-</div>
-
-<div>
-<strong>Région PACA</strong>
-<span>Intervention sur rendez-vous</span>
 </div>
 
 </section>
@@ -884,6 +1004,81 @@ alt="Caméra extérieure autonome à panneau solaire à l'hôtel Le Drips à Mar
 
 <div style="text-align:center;margin-top:40px;">
 <a href="#rappel" class="bouton bouton-principal">Demander un devis gratuit</a>
+</div>
+
+</section>
+
+<section class="section avis" id="avis">
+
+<span class="surtitre">
+Avis clients
+</span>
+
+<h2>
+Ce que disent nos clients à Marseille
+</h2>
+
+<div class="avis-entete">
+<span class="note-chiffre">5,0</span>
+<div class="note-detail">
+<span class="note-etoiles">★★★★★</span>
+<span class="note-texte">23 avis Google</span>
+</div>
+<a class="avis-lien" href="https://www.google.com/maps/place/Conforcam/@43.5407656,5.0218248,9z/data=!4m8!3m7!1s0x402fc5041b7dfe2b:0x46860d108f54d2e5!8m2!3d43.5407656!4d5.0218248!9m1!1b1!16s%2Fg%2F11zxf0t028" target="_blank" rel="noopener">
+Voir tous les avis sur Google →
+</a>
+</div>
+
+<div class="cartes">
+
+<article class="carte-avis">
+<span class="note-etoiles">★★★★★</span>
+<p>Très satisfait de cette société ! Installation de caméras de surveillance dans mon magasin à Marseille, travail sérieux et professionnel du début à la fin. Équipe réactive, à l'écoute et de très bons conseils.</p>
+<span class="avis-auteur">Jeanlouis Galabru<span class="avis-source">Avis Google</span></span>
+</article>
+
+<article class="carte-avis">
+<span class="note-etoiles">★★★★★</span>
+<p>Top ! Très professionnel, installation rapide et surtout à l'écoute de mes besoins ! Je recommande !</p>
+<span class="avis-auteur">Slim Mathers<span class="avis-source">Avis Google · Local Guide</span></span>
+</article>
+
+<article class="carte-avis">
+<span class="note-etoiles">★★★★★</span>
+<p>Très bonne expérience, équipe professionnelle, réactive et efficace. Je recommande vivement leurs services !</p>
+<span class="avis-auteur">Ariane Marvaldi<span class="avis-source">Avis Google</span></span>
+</article>
+
+<article class="carte-avis">
+<span class="note-etoiles">★★★★★</span>
+<p>Bonjour je tiens à vous remercier d'être intervenu aussi rapidement avec des prix défiant toute concurrence.</p>
+<span class="avis-auteur">Abdelkader Dahman<span class="avis-source">Avis Google</span></span>
+</article>
+
+<article class="carte-avis">
+<span class="note-etoiles">★★★★★</span>
+<p>Entreprise très sérieuse. Merci à vous pour la pose de caméras.</p>
+<span class="avis-auteur">Stéphanie Noll<span class="avis-source">Avis Google</span></span>
+</article>
+
+<article class="carte-avis">
+<span class="note-etoiles">★★★★★</span>
+<p>Très pro ! Je recommande à 200%.</p>
+<span class="avis-auteur">Sébastien Toubi<span class="avis-source">Avis Google · Local Guide</span></span>
+</article>
+
+<article class="carte-avis">
+<span class="note-etoiles">★★★★★</span>
+<p>Très professionnel et à l'écoute du client !! Je recommande fortement.</p>
+<span class="avis-auteur">Issam-eddine Larabi<span class="avis-source">Avis Google</span></span>
+</article>
+
+<article class="carte-avis">
+<span class="note-etoiles">★★★★★</span>
+<p>Je recommande fortement.</p>
+<span class="avis-auteur">Kader Abdou<span class="avis-source">Avis Google</span></span>
+</article>
+
 </div>
 
 </section>
@@ -1137,7 +1332,7 @@ Appeler
 <footer>
 
 <img
-src="assets/logo.jpg"
+src="assets/logo.png"
 alt="Logo ConforCam"
 >
 
