@@ -916,6 +916,14 @@ background:#2ab9ff;
 /* Cartes prestations : visuel produit */
 .carte-image{height:190px;display:flex;align-items:center;justify-content:center;margin:0 0 18px;}
 .carte-image img{max-height:100%;width:auto;max-width:100%;object-fit:contain;filter:drop-shadow(0 14px 22px rgba(21,159,255,.22));}
+
+/* Bandeau cookies */
+.cookie-bandeau{position:fixed;left:12px;right:12px;bottom:12px;z-index:200;max-width:720px;margin:0 auto;padding:18px 20px;background:#061b2f;border:1px solid #1d587f;border-radius:14px;box-shadow:0 10px 30px rgba(0,0,0,.45);color:#dbe7f0;font-size:14px;line-height:1.5;}
+.cookie-bandeau p{margin:0 0 12px;color:#dbe7f0;font-size:14px;}
+.cookie-bandeau a{color:#80d3ff;text-decoration:underline;}
+.cookie-boutons{display:flex;gap:10px;flex-wrap:wrap;}
+.cookie-boutons button{padding:10px 18px;border-radius:9px;border:1px solid #3279a6;background:transparent;color:#fff;font-weight:bold;font-size:14px;cursor:pointer;}
+.cookie-boutons .cookie-ok{background:linear-gradient(180deg,#2ab9ff,#0877d9);border:0;}
 </style>
 
 
@@ -1529,6 +1537,34 @@ montre(0);
 lance();
 cadre.querySelector('.diaporama-prev').addEventListener('click',function(){ montre(i-1); lance(); });
 cadre.querySelector('.diaporama-next').addEventListener('click',function(){ montre(i+1); lance(); });
+})();
+</script>
+<div class="cookie-bandeau" id="cookie-bandeau" hidden>
+<p>Ce site utilise Google Analytics pour mesurer sa fréquentation, uniquement si vous l’acceptez. <a href="mentions-legales.html">En savoir plus</a></p>
+<div class="cookie-boutons">
+<button type="button" id="cookie-refuser">Refuser</button>
+<button type="button" id="cookie-accepter" class="cookie-ok">Accepter</button>
+</div>
+</div>
+<script>
+(function(){
+var ID='G-CK7Z43CXJ9';
+function charger(){
+  var s=document.createElement('script');
+  s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+ID;
+  document.head.appendChild(s);
+  window.dataLayer=window.dataLayer||[];
+  window.gtag=function(){dataLayer.push(arguments);};
+  gtag('js',new Date());gtag('config',ID);
+}
+var b=document.getElementById('cookie-bandeau');
+var choix=null;
+try{choix=localStorage.getItem('conforcam-cookies');}catch(e){}
+if(choix==='oui'){charger();}
+else if(choix!=='non'){b.hidden=false;}
+function enregistrer(v){try{localStorage.setItem('conforcam-cookies',v);}catch(e){}b.hidden=true;}
+document.getElementById('cookie-accepter').addEventListener('click',function(){enregistrer('oui');charger();});
+document.getElementById('cookie-refuser').addEventListener('click',function(){enregistrer('non');});
 })();
 </script>
 </body>
