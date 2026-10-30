@@ -1506,9 +1506,9 @@ confirme();
 
 document.getElementById("envoi-mail").addEventListener("click", function(){
 if(!verifier()) return;
-window.location.href = "mailto:contact@conforcam.fr"
-+ "?subject=" + encodeURIComponent("Demande de devis - " + valeur("ville"))
-+ "&body=" + encodeURIComponent(texte());
+window.open("https://mail.google.com/mail/?view=cm&fs=1&to=conforcam13%40gmail.com"
++ "&su=" + encodeURIComponent("Demande de devis - " + valeur("ville"))
++ "&body=" + encodeURIComponent(texte()), "_blank", "noopener");
 confirme();
 });
 
