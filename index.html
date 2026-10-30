@@ -898,6 +898,25 @@ background:#2ab9ff;
 .hero .bouton-principal,.hero .bouton-secondaire{padding:12px 10px;font-size:13px;width:100%;}
 }
 }
+
+/* Accueil : chiffres et défilement des marques */
+.accueil-chiffres{background:#050d16;border-top:1px solid #174566;}
+.chiffres-grille{display:grid;grid-template-columns:repeat(3,1fr);max-width:1100px;margin:0 auto;padding:50px 6% 40px;text-align:center;}
+.chiffre strong{display:block;font-size:clamp(30px,4vw,48px);line-height:1.1;color:#fff;}
+.chiffre .etoiles{display:block;color:#f5a623;font-size:20px;letter-spacing:3px;margin:8px 0 4px;}
+.chiffre small{display:block;font-size:15px;color:#9fb3c2;}
+.marques{overflow:hidden;border-top:1px solid #174566;border-bottom:1px solid #174566;background:#03090f;padding:26px 0;}
+.marques-piste{display:flex;width:max-content;animation:defile 40s linear infinite;}
+.marques-piste span{flex:0 0 auto;padding:0 38px;font-size:clamp(20px,2.6vw,28px);font-weight:bold;color:#6f8395;white-space:nowrap;}
+.marques:hover .marques-piste{animation-play-state:paused;}
+@keyframes defile{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+@media (prefers-reduced-motion:reduce){.marques-piste{animation:none;}}
+@media(max-width:600px){
+.chiffres-grille{padding:36px 5% 30px;}
+.chiffre strong{font-size:21px;}
+.chiffres-grille{gap:6px;}
+.chiffre small{font-size:13px;}
+}
 </style>
 
 
@@ -973,6 +992,37 @@ style="object-position:50% 58%"
 alt="Technicien ConforCam installant une caméra de surveillance dans un commerce à Marseille"
 >
 
+</div>
+
+</section>
+
+<section class="accueil-chiffres">
+
+<div class="chiffres-grille">
+
+<div class="chiffre">
+<strong>5,0</strong>
+<span class="etoiles">★★★★★</span>
+<small>note moyenne Google</small>
+</div>
+
+<div class="chiffre">
+<strong>GRATUIT</strong>
+<small>devis</small>
+</div>
+
+<div class="chiffre">
+<strong>Marseille</strong>
+<small>et alentours</small>
+</div>
+
+</div>
+
+<div class="marques" aria-label="Marques de caméras installées">
+<div class="marques-piste">
+<span>Dahua</span><span>Hikvision</span><span>Reolink</span><span>TP-Link</span><span>Xvision</span><span>Ezviz</span><span>Uniview</span><span>Imou</span><span>Tapo</span><span>Axis</span><span>Bosch</span><span>Hanwha</span>
+<span aria-hidden="true">Dahua</span><span aria-hidden="true">Hikvision</span><span aria-hidden="true">Reolink</span><span aria-hidden="true">TP-Link</span><span aria-hidden="true">Xvision</span><span aria-hidden="true">Ezviz</span><span aria-hidden="true">Uniview</span><span aria-hidden="true">Imou</span><span aria-hidden="true">Tapo</span><span aria-hidden="true">Axis</span><span aria-hidden="true">Bosch</span><span aria-hidden="true">Hanwha</span>
+</div>
 </div>
 
 </section>
