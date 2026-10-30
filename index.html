@@ -839,6 +839,52 @@ display:none;
 .message-form.ok{background:rgba(21,159,255,.12);border:1px solid var(--bleu);color:var(--bleu-clair);}
 .message-form.ko{background:rgba(224,88,95,.12);border:1px solid #e0585f;color:#ffb9bd;}
 
+
+/* Accueil : mise en page inspiree de la reference, textes ConforCam */
+.bouton-devis-haut{
+margin-left:auto;
+padding:12px 20px;
+border-radius:9px;
+background:linear-gradient(180deg,#2ab9ff,#0877d9);
+color:white;
+font-weight:bold;
+font-size:15px;
+white-space:nowrap;
+}
+.navigation nav{margin-left:auto;}
+.navigation .telephone-haut{margin-left:0;}
+.hero h1{
+text-transform:none;
+letter-spacing:-1px;
+font-size:clamp(34px,5vw,70px);
+line-height:1.08;
+margin:0 0 30px;
+}
+.hero .liste-hero{
+list-style:none;
+padding:0;
+margin:0 0 30px;
+gap:14px;
+}
+.hero .liste-hero li{
+position:relative;
+padding-left:20px;
+font-size:18px;
+color:#dbe7f0;
+margin:0;
+}
+.hero .liste-hero li::before{
+content:"";
+position:absolute;
+left:0;
+top:.55em;
+width:7px;
+height:7px;
+border-radius:50%;
+background:#2ab9ff;
+}
+.hero .bouton-principal{padding:18px 26px;font-size:18px;}
+.hero .bouton-secondaire{padding:16px 24px;font-size:16px;}
 </style>
 
 
@@ -871,6 +917,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 07 70 47 02 18
 </a>
 
+<a class="bouton-devis-haut" href="#rappel">Devis gratuit →</a>
+
 </header>
 
 <main>
@@ -879,43 +927,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="hero-texte">
 
-<span class="badge">
-Marseille • Région PACA
-</span>
-
 <h1>
-Caméras et alarmes<br>
-<span>sans abonnement à Marseille.</span>
+Installation de caméras<br>
+et d’alarme à <span>Marseille</span>
 </h1>
 
-<p class="hero-description">
-Solutions professionnelles de vidéosurveillance et d’alarme
-pour les particuliers et les professionnels,
-sans abonnement et sans mensualité imposée.
-</p>
-
-<div class="liste-hero">
-
-<span>✓ Matériel garanti 2 ans</span>
-
-<span>✓ Consultation depuis votre smartphone</span>
-
-<span>✓ Installation et programmation complètes</span>
-
-</div>
+<ul class="liste-hero">
+<li>Sans abonnement — aucune mensualité imposée</li>
+<li>Devis gratuit et étude de vos besoins sur place</li>
+<li>Matériel garanti 2 ans — installation professionnelle</li>
+</ul>
 
 <div class="actions">
 
-<a class="bouton bouton-principal" href="#rappel">
-Être rappelé gratuitement
+<a class="bouton bouton-principal" href="tel:+33770470218">
+📞 07 70 47 02 18
 </a>
 
-<a class="bouton bouton-secondaire" href="tel:+33770470218">
-Appeler maintenant
+<a class="bouton bouton-secondaire" href="#rappel">
+Devis gratuit
 </a>
 
 </div>
-
 
 </div>
 
