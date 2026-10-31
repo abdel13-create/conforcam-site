@@ -921,6 +921,7 @@ background:#2ab9ff;
 .cookie-boutons button{padding:8px 14px;font-size:13px;}
 }
 #envoi-whatsapp{background:#20bd64!important;box-shadow:0 10px 30px rgba(32,189,100,.35)!important;}
+#envoi-par-mail{background:#0a2a44!important;border:1px solid #2a729f!important;}
 </style>
 
 
@@ -1363,6 +1364,8 @@ Votre projet
 
 <button type="button" class="bouton bouton-principal" id="envoi-whatsapp">Par WhatsApp</button>
 
+<button type="button" class="bouton bouton-principal" id="envoi-par-mail">Par mail</button>
+
 <button type="button" class="bouton bouton-principal" id="envoi-mail">Envoyer ma demande</button>
 
 <p class="note-form large">Réponse sous 24&nbsp;h ouvrées. Devis et déplacement gratuits sur Marseille et alentours.</p>
@@ -1480,6 +1483,14 @@ msg.textContent = "Votre demande est prête. Il ne reste plus qu'à l'envoyer da
 document.getElementById("envoi-whatsapp").addEventListener("click", function(){
 if(!verifier()) return;
 window.open("https://wa.me/33770470218?text=" + encodeURIComponent(texte()), "_blank", "noopener");
+confirme();
+});
+
+document.getElementById("envoi-par-mail").addEventListener("click", function(){
+if(!verifier()) return;
+var sujet="Demande de devis - "+valeur("nom");
+var corps=texte();
+window.location.href="mailto:contact@conforcam.fr?subject="+encodeURIComponent(sujet)+"&body="+encodeURIComponent(corps);
 confirme();
 });
 
