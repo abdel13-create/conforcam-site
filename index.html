@@ -1382,7 +1382,7 @@ Votre projet
 
 <button type="button" class="bouton bouton-principal" id="envoi-whatsapp">Par WhatsApp</button>
 
-<button type="button" class="bouton bouton-secondaire" id="envoi-mail">Par e-mail</button>
+<button type="button" class="bouton bouton-principal" id="envoi-mail">Envoyer ma demande</button>
 
 <p class="note-form large">Réponse sous 24&nbsp;h ouvrées. Devis et déplacement gratuits sur Marseille et alentours.</p>
 
@@ -1506,10 +1506,29 @@ confirme();
 
 document.getElementById("envoi-mail").addEventListener("click", function(){
 if(!verifier()) return;
-window.open("https://mail.google.com/mail/?view=cm&fs=1&to=conforcam13%40gmail.com"
-+ "&su=" + encodeURIComponent("Demande de devis - " + valeur("ville"))
-+ "&body=" + encodeURIComponent(texte()), "_blank", "noopener");
-confirme();
+var bouton=this;
+bouton.disabled=true;
+var donnees=new FormData();
+donnees.append("nom", valeur("nom"));
+donnees.append("telephone", valeur("telephone"));
+donnees.append("ville", valeur("ville"));
+donnees.append("type_de_bien", valeur("bien"));
+donnees.append("projet", valeur("projet"));
+fetch("https://formspree.io/f/xdeelpbj", {method:"POST", body:donnees, headers:{"Accept":"application/json"}})
+.then(function(r){
+if(r.ok){
+msg.className="message-form large visible ok";
+msg.textContent="Merci, votre demande est bien envoyée. Nous vous recontactons rapidement.";
+f.reset();
+}else{
+throw new Error("erreur");
+}
+})
+.catch(function(){
+msg.className="message-form large visible ko";
+msg.textContent="Le message n'a pas pu partir. Réessayez ou appelez-nous au 07 70 47 02 18.";
+})
+.finally(function(){ bouton.disabled=false; });
 });
 
 f.addEventListener("input", function(e){
