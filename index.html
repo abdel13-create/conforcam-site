@@ -817,7 +817,7 @@ white-space:nowrap;
 .hero h1{
 text-transform:none;
 letter-spacing:-1px;
-font-size:clamp(34px,5vw,70px);
+font-size:clamp(34px,3.5vw,52px);
 line-height:1.08;
 margin:0 0 30px;
 }
@@ -902,7 +902,25 @@ background:#2ab9ff;
 }
 .galerie.diaporama{text-align:center;}
 .galerie.diaporama figcaption{text-align:left;}
-.galerie.diaporama .diaporama-fleche{position:static;display:inline-block;top:auto;margin:16px 8px 0;background:#0a2a44;border:1px solid #1d587f;}</style>
+.galerie.diaporama .diaporama-fleche{position:static;display:inline-block;top:auto;margin:16px 8px 0;background:#0a2a44;border:1px solid #1d587f;}
+/* Derniers ajustements */
+@media(min-width:901px){
+.galerie.diaporama{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:18px;width:100%!important;max-width:1100px!important;}
+.galerie.diaporama figure{opacity:1!important;}
+.galerie.diaporama figure.actif,.galerie.diaporama figure.voisin{display:block!important;}
+.galerie.diaporama figure img{height:230px;object-fit:cover;}
+.galerie.diaporama .diaporama-fleche{position:absolute!important;top:40%!important;margin:0!important;}
+.galerie.diaporama .diaporama-prev{left:-58px!important;}
+.galerie.diaporama .diaporama-next{right:-58px!important;}
+.avis .cartes{grid-template-columns:repeat(4,1fr);}
+}
+@media(max-width:600px){
+.cookie-bandeau{left:8px;right:8px;bottom:8px;padding:12px 14px;border-radius:12px;}
+.cookie-bandeau p{font-size:13px;margin:0 0 8px;}
+.cookie-boutons{gap:8px;}
+.cookie-boutons button{padding:8px 14px;font-size:13px;}
+}
+</style>
 
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"LocalBusiness","name":"ConforCam","url":"https://conforcam.fr/","image":["https://conforcam.fr/assets/logo.png","https://conforcam.fr/assets/realisations-photos/01-bianchi-pose.jpg"],"telephone":"+33770470218","email":"contact@conforcam.fr","description":"Installation de caméras de surveillance et alarmes sans abonnement à Marseille et dans les Bouches-du-Rhône.","areaServed":["Marseille","Bouches-du-Rhône","Aix-en-Provence","Aubagne","Allauch","Plan-de-Cuques","Cassis","La Ciotat"],"aggregateRating":{"@type":"AggregateRating","ratingValue":"5.0","reviewCount":"23","bestRating":"5"}}</script>
@@ -920,7 +938,6 @@ background:#2ab9ff;
 
 <nav>
 <a href="#prestations">Prestations</a>
-<a href="/articles/">Articles</a>
 <a href="#realisations">Réalisations</a>
 <a href="#avis">Avis</a>
 <a href="#pourquoi">Pourquoi nous</a>
@@ -1491,9 +1508,11 @@ var slides=cadre.querySelectorAll('figure');
 if(slides.length<2)return;
 var i=0, timer=null;
 function montre(n){
-slides[i].classList.remove('actif');
+slides.forEach(function(f){ f.classList.remove('actif','voisin'); });
 i=(n+slides.length)%slides.length;
 slides[i].classList.add('actif');
+slides[(i+1)%slides.length].classList.add('voisin');
+slides[(i+2)%slides.length].classList.add('voisin');
 }
 function lance(){ clearInterval(timer); timer=setInterval(function(){ montre(i+1); },3000); }
 montre(0);
