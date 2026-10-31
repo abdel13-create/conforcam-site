@@ -373,6 +373,8 @@ gap:20px;
 }
 
 .carte{
+position:relative;
+transition:border-color .18s ease;
 padding:28px;
 background:linear-gradient(180deg,#092740,#051522);
 border:1px solid var(--bordure);
@@ -927,6 +929,10 @@ background:#2ab9ff;
 .insta-lien strong{font-size:18px;font-weight:700;}
 .insta-pied{display:inline-flex;align-items:center;gap:8px;color:#e8c7d8!important;}
 .insta-pied .ico-insta{width:20px;height:20px;}
+.carte:hover{border-color:#2ab9ff;}
+.carte-lien{display:inline-flex;align-items:center;gap:7px;margin-top:16px;color:#80d3ff;font-weight:700;text-decoration:none;}
+.carte-lien::after{content:"";position:absolute;inset:0;border-radius:15px;}
+.carte:hover .carte-lien{text-decoration:underline;}
 </style>
 
 
@@ -945,6 +951,7 @@ background:#2ab9ff;
 
 <nav>
 <a href="#prestations">Prestations</a>
+<a href="/prix-installation-camera-marseille/">Tarifs</a>
 <a href="/articles/">Articles</a>
 <a href="#realisations">Réalisations</a>
 <a href="#avis">Avis</a>
@@ -1062,6 +1069,8 @@ Une protection adaptée à votre besoin
 Installation, câblage, enregistrement local
 et consultation depuis votre téléphone.
 </p>
+<a class="carte-lien" href="/installation-camera-marseille/">Installation et câblage <span aria-hidden="true">&rarr;</span></a>
+
 
 </article>
 
@@ -1079,6 +1088,8 @@ et consultation depuis votre téléphone.
 Solutions Wi-Fi ou autonomes pour protéger
 l’intérieur et l’extérieur de votre bien.
 </p>
+<a class="carte-lien" href="/camera-surveillance-marseille/">Nos caméras de surveillance <span aria-hidden="true">&rarr;</span></a>
+
 
 </article>
 
@@ -1096,6 +1107,8 @@ l’intérieur et l’extérieur de votre bien.
 Détecteurs, sirène et application mobile
 sans frais mensuels obligatoires.
 </p>
+<a class="carte-lien" href="/alarme-sans-abonnement-marseille/">Nos alarmes sans abonnement <span aria-hidden="true">&rarr;</span></a>
+
 
 </article>
 
