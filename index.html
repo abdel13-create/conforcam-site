@@ -1,8 +1,7 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-<head><!-- Google Tag Manager -->
-<!-- End Google Tag Manager -->
+<head>
 
 <meta charset="UTF-8">
 <link rel="canonical" href="https://conforcam.fr/">
@@ -953,32 +952,103 @@ background:#2ab9ff;
 .faq-accueil details p{margin:12px 0 0;color:#cfdfeb;}
 @media(max-width:900px){.pourquoi .cartes{grid-template-columns:1fr 1fr;}.etapes{grid-template-columns:1fr 1fr;}.economies-boite{grid-template-columns:1fr;gap:18px;}}
 @media(max-width:600px){.pourquoi .cartes,.etapes{grid-template-columns:1fr;}.economies-boite{padding:24px;}.economies-boite p{font-size:16px;}}
+
+/* Corrections nov. 2026 : menu mobile, barre d'appel, grilles, pros, cookies, zones tactiles */
+.ico{width:20px;height:20px;flex:0 0 20px;vertical-align:-4px}
+.logo-lien{flex:0 0 auto}
+.telephone-haut{white-space:nowrap}
+section[id]{scroll-margin-top:100px}
+.bouton .ico{margin-right:6px}
+.burger{display:none;width:48px;height:48px;border:1px solid var(--bordure);border-radius:10px;background:transparent;cursor:pointer;position:relative;flex:0 0 48px}
+.burger span,.burger span::before,.burger span::after{position:absolute;left:12px;width:22px;height:2px;background:#fff;content:"";transition:transform .2s}
+.burger span{top:23px}.burger span::before{top:-7px;left:0}.burger span::after{top:7px;left:0}
+.burger[aria-expanded="true"] span{background:transparent}
+.burger[aria-expanded="true"] span::before{transform:translateY(7px) rotate(45deg)}
+.burger[aria-expanded="true"] span::after{transform:translateY(-7px) rotate(-45deg)}
+.navigation nav a{padding:12px 8px;border-radius:8px}
+.navigation nav a:hover{background:#0a2a44;color:#fff}
+.carte-lien,.avis-lien{min-height:44px}
+.pros-intro{max-width:820px;color:var(--texte-secondaire);font-size:18px;margin:-10px 0 30px}
+.pros-grille{grid-template-columns:repeat(3,1fr)}
+.carte-pro{display:block;color:inherit}
+.carte-pro p{color:var(--texte-secondaire)}
+.carte-suite{display:inline-flex;align-items:center;min-height:44px;color:#80d3ff;font-weight:700}
+.carte-maintenance{background:linear-gradient(180deg,#0b3557,#061f35);border-color:#2a8ccc}
+.economies-chiffre small.avant{margin:0 0 6px;font-size:18px;color:#dbe7f0}
+.etapes a{color:#80d3ff}
+footer{grid-template-columns:1.3fr 1fr 1fr 1fr;padding:44px 6% 40px}
+footer a{display:flex;align-items:center;min-height:40px;margin:0}
+footer img{height:70px;width:auto}
+footer .slogan{color:#dbe7f0;font-style:italic;margin:8px 0}
+.barre-mobile{display:none}
+.cookie-bandeau{display:flex;align-items:center;gap:12px;left:50%;right:auto;transform:translateX(-50%);width:calc(100% - 24px);max-width:560px;padding:10px 14px;font-size:13.5px}
+.cookie-bandeau[hidden]{display:none}
+.cookie-bandeau p{margin:0!important;flex:1;font-size:13.5px}
+.cookie-bandeau button{min-height:40px;padding:8px 14px;border-radius:8px;border:1px solid #3279a6;background:transparent;color:#fff;font:inherit;font-weight:700;cursor:pointer}
+.cookie-bandeau .cookie-ok{background:linear-gradient(180deg,#2ab9ff,#0877d9);border:0}
+@media(max-width:1440px){.telephone-haut{display:none}}
+@media(max-width:1060px){
+.burger{display:block}
+.navigation{position:sticky}
+.navigation nav{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;margin:0;padding:8px 5% 16px;background:#020b14;border-bottom:1px solid #174566;box-shadow:0 18px 30px rgba(0,0,0,.5)}
+.navigation nav.ouvert{display:flex}
+.navigation nav a{font-size:17px;padding:14px 8px;border-bottom:1px solid #0d2c45;border-radius:0}
+.bouton-devis-haut{margin-left:auto}
+}
+@media(max-width:900px){
+#prestations .cartes{grid-template-columns:1fr 1fr}
+#prestations .cartes .carte:last-child{grid-column:1/-1}
+.pros-grille{grid-template-columns:1fr 1fr}
+.etapes li:last-child{grid-column:1/-1}
+footer{grid-template-columns:1fr 1fr}
+}
+@media(max-width:600px){
+#prestations .cartes,.pros-grille{grid-template-columns:1fr}
+.etapes li:last-child{grid-column:auto}
+footer{grid-template-columns:1fr;padding-bottom:110px}
+.hero{position:relative}
+.hero-image{display:block;position:absolute;inset:0;min-height:0;z-index:0}
+.hero-image::before{background:linear-gradient(180deg,rgba(2,11,20,.55) 0%,rgba(2,11,20,.78) 45%,rgba(2,11,20,.95) 100%)}
+.hero-texte h1,.hero .liste-hero li{text-shadow:0 2px 12px rgba(0,0,0,.7)}
+.hero-image img{object-position:50% 30%!important}
+.hero-texte{position:relative;z-index:2;padding:40px 5% 34px}
+.bouton-devis-haut{padding:10px 13px;font-size:14px}
+.navigation .logo{height:54px}
+.barre-mobile{display:grid;grid-template-columns:1fr 1fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:150;padding:8px 10px calc(8px + env(safe-area-inset-bottom));background:rgba(2,11,20,.97);border-top:1px solid #174566;transition:transform .2s}
+.barre-mobile a{display:flex;align-items:center;justify-content:center;gap:8px;min-height:50px;border-radius:10px;font-weight:700;color:#fff}
+.barre-mobile .appel{background:#20bd64}
+.barre-mobile .devis{background:linear-gradient(180deg,#2ab9ff,#0877d9)}
+body.cache-flottants .barre-mobile{transform:translateY(110%)}
+.cookie-bandeau{bottom:76px;gap:8px;padding:8px 10px}
+.cookie-bandeau p{font-size:12.5px}
+.cookie-bandeau button{padding:6px 10px;font-size:13px}
+}
 </style>
 
 
-<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LocalBusiness", "@id": "https://conforcam.fr/#entreprise", "name": "ConforCam", "url": "https://conforcam.fr/", "logo": "https://conforcam.fr/assets/logo.png", "image": ["https://conforcam.fr/assets/logo.png", "https://conforcam.fr/assets/realisations-photos/01-bianchi-pose.jpg"], "telephone": "+33770470218", "email": "contact@conforcam.fr", "description": "Installation de caméras de surveillance et alarmes sans abonnement à Marseille et dans les Bouches-du-Rhône.", "slogan": "Une vision pour votre confort", "address": {"@type": "PostalAddress", "addressLocality": "Marseille", "addressRegion": "Provence-Alpes-Côte d’Azur", "addressCountry": "FR"}, "areaServed": [{"@type": "City", "name": "Marseille"}, {"@type": "City", "name": "Aix-en-Provence"}, {"@type": "City", "name": "Aubagne"}, {"@type": "City", "name": "Allauch"}, {"@type": "City", "name": "Plan-de-Cuques"}, {"@type": "City", "name": "Cassis"}, {"@type": "City", "name": "La Ciotat"}, {"@type": "AdministrativeArea", "name": "Bouches-du-Rhône"}], "sameAs": ["https://www.google.com/maps/place/Conforcam/@43.5407656,5.0218248,9z/data=!4m8!3m7!1s0x402fc5041b7dfe2b:0x46860d108f54d2e5!8m2!3d43.5407656!4d5.0218248!9m1!1b1!16s%2Fg%2F11zxf0t028", "https://www.instagram.com/conforcam13"], "knowsAbout": ["vidéosurveillance", "caméra de surveillance", "caméra IP", "alarme sans abonnement", "enregistreur NVR"], "hasOfferCatalog": {"@type": "OfferCatalog", "name": "Services ConforCam", "itemListElement": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Installation de caméras de surveillance à Marseille", "url": "https://conforcam.fr/camera-surveillance-marseille/"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Installation de caméras à Marseille", "url": "https://conforcam.fr/installation-camera-marseille/"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Vidéosurveillance à Marseille", "url": "https://conforcam.fr/videosurveillance-marseille/"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Caméras de surveillance pour commerces à Marseille", "url": "https://conforcam.fr/camera-commerce-marseille/"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Alarme sans abonnement à Marseille", "url": "https://conforcam.fr/alarme-sans-abonnement-marseille/"}}]}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "LocalBusiness", "@id": "https://conforcam.fr/#entreprise", "name": "ConforCam", "url": "https://conforcam.fr/", "logo": "https://conforcam.fr/assets/logo.png", "image": ["https://conforcam.fr/assets/logo.png", "https://conforcam.fr/assets/realisations-photos/01-bianchi-pose.jpg"], "telephone": "+33770470218", "email": "contact@conforcam.fr", "description": "Installation de caméras de surveillance et alarmes sans abonnement à Marseille et dans les Bouches-du-Rhône.", "slogan": "Une vision pour votre confort", "address": {"@type": "PostalAddress", "addressLocality": "Marseille", "addressRegion": "Provence-Alpes-Côte d’Azur", "addressCountry": "FR"}, "areaServed": [{"@type": "City", "name": "Marseille"}, {"@type": "City", "name": "Aix-en-Provence"}, {"@type": "City", "name": "Aubagne"}, {"@type": "City", "name": "Allauch"}, {"@type": "City", "name": "Plan-de-Cuques"}, {"@type": "City", "name": "Cassis"}, {"@type": "City", "name": "La Ciotat"}, {"@type": "AdministrativeArea", "name": "Bouches-du-Rhône"}], "sameAs": ["https://www.google.com/maps/place/Conforcam/@43.5407656,5.0218248,9z/data=!4m8!3m7!1s0x402fc5041b7dfe2b:0x46860d108f54d2e5!8m2!3d43.5407656!4d5.0218248!9m1!1b1!16s%2Fg%2F11zxf0t028", "https://www.instagram.com/conforcam13"], "knowsAbout": ["vidéosurveillance", "caméra de surveillance", "caméra IP", "alarme sans abonnement", "enregistreur NVR"], "hasOfferCatalog": {"@type": "OfferCatalog", "name": "Services ConforCam", "itemListElement": [{"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Installation de caméras de surveillance à Marseille", "url": "https://conforcam.fr/camera-surveillance-marseille/"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Installation de caméras à Marseille", "url": "https://conforcam.fr/installation-camera-marseille/"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Vidéosurveillance à Marseille", "url": "https://conforcam.fr/videosurveillance-marseille/"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Caméras de surveillance pour commerces à Marseille", "url": "https://conforcam.fr/camera-commerce-marseille/"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Alarme sans abonnement à Marseille", "url": "https://conforcam.fr/alarme-sans-abonnement-marseille/"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Vidéosurveillance pour hôtels à Marseille", "url": "https://conforcam.fr/camera-surveillance-hotel-marseille/"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Vidéosurveillance pour copropriétés à Marseille", "url": "https://conforcam.fr/videosurveillance-copropriete-marseille/"}}, {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Dépannage de caméras de surveillance à Marseille", "url": "https://conforcam.fr/depannage-videosurveillance-marseille/"}}, {"@type": "Offer", "price": "39", "priceCurrency": "EUR", "priceSpecification": {"@type": "UnitPriceSpecification", "price": "39", "priceCurrency": "EUR", "unitText": "mois"}, "itemOffered": {"@type": "Service", "name": "Contrat de maintenance vidéosurveillance sans engagement", "url": "https://conforcam.fr/maintenance-videosurveillance-marseille/"}}]}}</script>
 
-<link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="48x48" href="/assets/icone-48.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta property="og:type" content="website"><meta property="og:locale" content="fr_FR"><meta property="og:site_name" content="ConforCam"><meta property="og:title" content="Caméra sans abonnement à Marseille : devis gratuit | ConforCam"><meta property="og:description" content=""><meta property="og:url" content="https://conforcam.fr/"><meta property="og:image" content="https://conforcam.fr/assets/realisations-photos/01-bianchi-pose.jpg"><meta name="twitter:card" content="summary_large_image"></head>
+<link rel="icon" href="/favicon.ico" sizes="any"><link rel="icon" type="image/png" sizes="48x48" href="/assets/icone-48.png"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta property="og:type" content="website"><meta property="og:locale" content="fr_FR"><meta property="og:site_name" content="ConforCam"><meta property="og:title" content="Caméra sans abonnement à Marseille : devis gratuit | ConforCam"><meta property="og:description" content="Caméras et alarmes sans abonnement pour commerces, hôtels, copropriétés et particuliers à Marseille. Matériel garanti 2 ans, devis gratuit."><meta property="og:url" content="https://conforcam.fr/"><meta property="og:image" content="https://conforcam.fr/assets/realisations-photos/01-bianchi-pose.jpg"><meta name="twitter:card" content="summary_large_image">
+<link rel="preload" as="image" href="/assets/realisations-photos/01-bianchi-pose.jpg">
+</head>
 
-<body><!-- Google Tag Manager (noscript) -->
-<!-- End Google Tag Manager (noscript) -->
+<body>
 
 <header class="navigation">
 
-<a href="#accueil">
-<img class="logo" src="assets/logo.png" alt="ConforCam - caméras et alarmes sans abonnement à Marseille">
+<a href="#accueil" class="logo-lien">
+<img class="logo" src="/assets/logo-entete.webp" width="628" height="301" alt="ConforCam - caméras et alarmes sans abonnement à Marseille">
 </a>
 
-<nav>
-<a href="#prestations">Prestations</a>
+<nav id="menu" aria-label="Menu principal">
 <a href="/camera-commerce-marseille/">Professionnels</a>
+<a href="#prestations">Particuliers</a>
 <a href="/prix-installation-camera-marseille/">Tarifs</a>
+<a href="/maintenance-videosurveillance-marseille/">Maintenance</a>
 <a href="/depannage-videosurveillance-marseille/">Dépannage</a>
-<a href="/articles/">Articles</a>
 <a href="#realisations">Réalisations</a>
 <a href="#avis">Avis</a>
-<a href="#pourquoi">Pourquoi nous</a>
-<a href="#rappel">Être rappelé</a>
+<a href="/blog/">Conseils</a>
 </nav>
 
 <a class="telephone-haut" href="tel:+33770470218">
@@ -986,6 +1056,8 @@ background:#2ab9ff;
 </a>
 
 <a class="bouton-devis-haut" href="#rappel">Devis gratuit →</a>
+
+<button class="burger" type="button" aria-controls="menu" aria-expanded="false" aria-label="Ouvrir le menu"><span></span></button>
 
 </header>
 
@@ -1004,14 +1076,14 @@ et d’alarme à <span>Marseille</span>
 <li>Sans abonnement — aucune mensualité imposée</li>
 <li>Devis gratuit et étude de vos besoins sur place</li>
 <li>Matériel garanti 2 ans — installation professionnelle</li>
-<li>Intervention sous 24 h à Marseille et région PACA</li>
+<li>Intervention sous 24 h à Marseille et dans les Bouches-du-Rhône</li>
 <li>Tarif fixé avant intervention — aucune mauvaise surprise</li>
 </ul>
 
 <div class="actions">
 
 <a class="bouton bouton-principal" href="tel:+33770470218">
-📞 07 70 47 02 18
+<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>&nbsp;07 70 47 02 18
 </a>
 
 <a class="bouton bouton-secondaire" href="#rappel">
@@ -1025,9 +1097,10 @@ Devis gratuit
 <div class="hero-image">
 
 <img
-src="assets/realisations-photos/03-bianchi-chantier.jpg"
-style="object-position:50% 58%"
-alt="Technicien ConforCam installant une caméra de surveillance dans un commerce à Marseille"
+src="/assets/realisations-photos/01-bianchi-pose.jpg"
+style="object-position:50% 40%"
+fetchpriority="high"
+alt="Technicien ConforCam installant une caméra dans la boutique Jacques Bianchi à Marseille"
 >
 
 </div>
@@ -1058,8 +1131,10 @@ alt="Technicien ConforCam installant une caméra de surveillance dans un commerc
 
 <div class="marques" aria-label="Marques de caméras installées">
 <div class="marques-piste">
-<span>Dahua</span><span>Hikvision</span><span>Reolink</span><span>TP-Link</span><span>Xvision</span><span>Ezviz</span><span>Uniview</span><span>Imou</span><span>Tapo</span><span>Axis</span><span>Bosch</span><span>Hanwha</span>
-<span aria-hidden="true">Dahua</span><span aria-hidden="true">Hikvision</span><span aria-hidden="true">Reolink</span><span aria-hidden="true">TP-Link</span><span aria-hidden="true">Xvision</span><span aria-hidden="true">Ezviz</span><span aria-hidden="true">Uniview</span><span aria-hidden="true">Imou</span><span aria-hidden="true">Tapo</span><span aria-hidden="true">Axis</span><span aria-hidden="true">Bosch</span><span aria-hidden="true">Hanwha</span>
+<span>Dahua</span><span>Hikvision</span><span>Reolink</span><span>TP-Link</span><span>Ezviz</span><span>Imou</span><span>Tapo</span>
+<span aria-hidden="true">Dahua</span><span aria-hidden="true">Hikvision</span><span aria-hidden="true">Reolink</span><span aria-hidden="true">TP-Link</span><span aria-hidden="true">Ezviz</span><span aria-hidden="true">Imou</span><span aria-hidden="true">Tapo</span>
+<span aria-hidden="true">Dahua</span><span aria-hidden="true">Hikvision</span><span aria-hidden="true">Reolink</span><span aria-hidden="true">TP-Link</span><span aria-hidden="true">Ezviz</span><span aria-hidden="true">Imou</span><span aria-hidden="true">Tapo</span>
+<span aria-hidden="true">Dahua</span><span aria-hidden="true">Hikvision</span><span aria-hidden="true">Reolink</span><span aria-hidden="true">TP-Link</span><span aria-hidden="true">Ezviz</span><span aria-hidden="true">Imou</span><span aria-hidden="true">Tapo</span>
 </div>
 </div>
 
@@ -1080,7 +1155,7 @@ Une protection adaptée à votre besoin
 <article class="carte">
 
 <div class="carte-image">
-<img src="assets/cartes/camera-filaire.webp" alt="Caméra filaire ConforCam" width="520" height="468" loading="lazy">
+<img src="/assets/cartes/camera-filaire.webp" alt="Caméra filaire ConforCam" width="520" height="468" loading="lazy">
 </div>
 
 <span class="carte-numero">01</span>
@@ -1099,7 +1174,7 @@ et consultation depuis votre téléphone.
 <article class="carte">
 
 <div class="carte-image">
-<img src="assets/cartes/camera-sans-fil.webp" alt="Caméra sans fil ConforCam" width="520" height="412" loading="lazy">
+<img src="/assets/cartes/camera-sans-fil.webp" alt="Caméra sans fil ConforCam" width="520" height="412" loading="lazy">
 </div>
 
 <span class="carte-numero">02</span>
@@ -1118,7 +1193,7 @@ l’intérieur et l’extérieur de votre bien.
 <article class="carte">
 
 <div class="carte-image">
-<img src="assets/cartes/alarme.webp" alt="Matériel d’alarme ConforCam sans abonnement" width="520" height="278" loading="lazy">
+<img src="/assets/cartes/alarme.webp" alt="Matériel d’alarme ConforCam sans abonnement" width="520" height="278" loading="lazy">
 </div>
 
 <span class="carte-numero">03</span>
@@ -1138,6 +1213,30 @@ sans frais mensuels obligatoires.
 
 </section>
 
+
+<section class="section pros" id="professionnels">
+
+<span class="surtitre">
+Professionnels
+</span>
+
+<h2>
+Commerces, hôtels, copropriétés, entreprises
+</h2>
+
+<p class="pros-intro">Nous étudions chaque site gratuitement et nous plaçons les caméras dans le respect des règles (autorisation préfectorale, information des clients et des salariés). Devis sur mesure après visite.</p>
+
+<div class="cartes pros-grille">
+<a class="carte carte-pro" href="/camera-commerce-marseille/"><h3>Commerces et boutiques</h3><p>Entrée, caisse, rayons, réserve. Aide au dossier préfectoral.</p><span class="carte-suite">Voir →</span></a>
+<a class="carte carte-pro" href="/blog/camera-surveillance-restaurant-marseille/"><h3>Restaurants et bars</h3><p>Salle, comptoir, terrasse, fermeture de nuit.</p><span class="carte-suite">Voir →</span></a>
+<a class="carte carte-pro" href="/camera-surveillance-hotel-marseille/"><h3>Hôtels</h3><p>Accueil, accès, parking. Caméras solaires sans travaux.</p><span class="carte-suite">Voir →</span></a>
+<a class="carte carte-pro" href="/videosurveillance-copropriete-marseille/"><h3>Syndics et copropriétés</h3><p>Parking, hall, locaux communs. Devis prêt pour l’AG.</p><span class="carte-suite">Voir →</span></a>
+<a class="carte carte-pro" href="/blog/bureau-entreprise-marseille-alarme/"><h3>Bureaux et entrepôts</h3><p>Alarme, accès, parking, protection la nuit.</p><span class="carte-suite">Voir →</span></a>
+<a class="carte carte-pro carte-maintenance" href="/maintenance-videosurveillance-marseille/"><h3>Maintenance 39&nbsp;€/mois</h3><p>Toute la maintenance de vos caméras. Sans engagement.</p><span class="carte-suite">Voir le contrat →</span></a>
+</div>
+
+</section>
+
 <section class="section economies" id="economies">
 
 <span class="surtitre">
@@ -1149,7 +1248,7 @@ Pas d’abonnement, ce sont des économies chaque année
 </h2>
 
 <div class="economies-boite">
-<div class="economies-chiffre">780&nbsp;€ HT<small>d’abonnement évités par an, jusqu’à</small></div>
+<div class="economies-chiffre"><small class="avant">Jusqu’à</small>780&nbsp;€ HT<small>économisés par an</small></div>
 <div>
 <p>Avec une télésurveillance classique, un commerce paie souvent plus de 60&nbsp;€ HT par mois, tant que dure le contrat. Chez ConforCam, vous payez l’installation et le matériel une fois. Ensuite, vos caméras sont à vous et vous ne nous devez rien de plus.</p>
 <p class="petite-ligne">Comparaison basée sur les tarifs publics d’offres de télésurveillance professionnelles en 2026. Montant indicatif.</p>
@@ -1171,23 +1270,15 @@ Des installations réelles
 <div class="galerie diaporama" id="diaporama" style="display:block;width:500px;max-width:100%;margin:0 auto;position:relative;">
 
 <figure>
-<img src="assets/realisations-photos/01-bianchi-pose.jpg" style="object-position:50% 50%"
-alt="Installation de 4 caméras filaires chez Jacques Bianchi à Marseille">
-<figcaption>
-<strong>Jacques Bianchi, Marseille</strong><br>4 caméras filaires et enregistreur NVR
-</figcaption>
-</figure>
-
-<figure>
-<img src="assets/realisations-photos/02-bianchi-enseigne.jpg" style="object-position:50% 50%"
+<img src="/assets/realisations-photos/02-bianchi-enseigne.jpg" style="object-position:50% 50%"
 alt="Pose d'une caméra dôme dans la boutique Jacques Bianchi à Marseille">
 <figcaption>
-<strong>Jacques Bianchi, Marseille</strong><br>Pose d'une caméra dôme en boutique
+<strong>Jacques Bianchi, Marseille</strong><br>4 caméras filaires, dôme en boutique et enregistreur NVR
 </figcaption>
 </figure>
 
 <figure>
-<img loading="lazy" decoding="async" src="assets/realisations-photos/03-bianchi-chantier.jpg" style="object-position:50% 62%"
+<img loading="lazy" decoding="async" src="/assets/realisations-photos/03-bianchi-chantier.jpg" style="object-position:50% 62%"
 alt="Passage des câbles lors d'une installation de vidéosurveillance à Marseille">
 <figcaption>
 <strong>Jacques Bianchi, Marseille</strong><br>Passage des câbles et raccordement
@@ -1195,7 +1286,7 @@ alt="Passage des câbles lors d'une installation de vidéosurveillance à Marsei
 </figure>
 
 <figure>
-<img loading="lazy" decoding="async" src="assets/realisations-photos/04-bianchi-plafond.jpg" style="object-position:50% 45%"
+<img loading="lazy" decoding="async" src="/assets/realisations-photos/04-bianchi-plafond.jpg" style="object-position:50% 45%"
 alt="Caméra dôme intérieure installée au plafond à Marseille">
 <figcaption>
 <strong>Jacques Bianchi, Marseille</strong><br>Caméra dôme intérieure au plafond
@@ -1203,7 +1294,7 @@ alt="Caméra dôme intérieure installée au plafond à Marseille">
 </figure>
 
 <figure>
-<img loading="lazy" decoding="async" src="assets/realisations-photos/05-bianchi-pierre.jpg" style="object-position:50% 50%"
+<img loading="lazy" decoding="async" src="/assets/realisations-photos/05-bianchi-pierre.jpg" style="object-position:50% 50%"
 alt="Caméra de surveillance intégrée sur un mur en pierre à Marseille">
 <figcaption>
 <strong>Jacques Bianchi, Marseille</strong><br>Intégration discrète sur mur en pierre
@@ -1211,7 +1302,7 @@ alt="Caméra de surveillance intégrée sur un mur en pierre à Marseille">
 </figure>
 
 <figure>
-<img loading="lazy" decoding="async" src="assets/realisations-photos/06-bianchi-angle.jpg" style="object-position:50% 45%"
+<img loading="lazy" decoding="async" src="/assets/realisations-photos/06-bianchi-angle.jpg" style="object-position:50% 45%"
 alt="Caméra couvrant l'angle d'une boutique à Marseille">
 <figcaption>
 <strong>Jacques Bianchi, Marseille</strong><br>Couverture des angles de la boutique
@@ -1219,7 +1310,7 @@ alt="Caméra couvrant l'angle d'une boutique à Marseille">
 </figure>
 
 <figure>
-<img loading="lazy" decoding="async" src="assets/realisations-photos/07-bianchi-reolink.jpg" style="object-position:50% 45%"
+<img loading="lazy" decoding="async" src="/assets/realisations-photos/07-bianchi-reolink.jpg" style="object-position:50% 45%"
 alt="Caméra de surveillance intérieure supplémentaire à Marseille">
 <figcaption>
 <strong>Jacques Bianchi, Marseille</strong><br>Caméra intérieure supplémentaire
@@ -1227,7 +1318,7 @@ alt="Caméra de surveillance intérieure supplémentaire à Marseille">
 </figure>
 
 <figure>
-<img loading="lazy" decoding="async" src="assets/realisations-photos/08-drips-solaire.jpg" style="object-position:50% 32%"
+<img loading="lazy" decoding="async" src="/assets/realisations-photos/08-drips-solaire.jpg" style="object-position:50% 32%"
 alt="Caméra extérieure autonome à panneau solaire à l'hôtel Le Drips à Marseille">
 <figcaption>
 <strong>Hôtel Le Drips, Marseille</strong><br>3 caméras extérieures à panneaux solaires
@@ -1374,7 +1465,7 @@ De l’appel à l’installation
 <li><strong>Visite sur place</strong>On étudie vos besoins, les zones à filmer et les points sensibles.</li>
 <li><strong>Installation</strong>Pose propre des caméras, de l’enregistreur et/ou de l’alarme.</li>
 <li><strong>Configuration</strong>On installe l’appli sur votre téléphone et on vous montre comment l’utiliser.</li>
-<li><strong>Suivi</strong>Assistance après installation et contrat de maintenance si vous le souhaitez.</li>
+<li><strong>Suivi</strong>Assistance après installation, et <a href="/maintenance-videosurveillance-marseille/">maintenance à 39&nbsp;€/mois</a> sans engagement si vous le souhaitez.</li>
 </ol>
 
 </section>
@@ -1413,6 +1504,11 @@ Vos questions sur la vidéosurveillance sans abonnement
 </details>
 
 <details>
+<summary>Proposez-vous un contrat de maintenance ?</summary>
+<p>Oui, à 39&nbsp;€ par mois, sans engagement : toute la maintenance de vos caméras est comprise. <a href="/maintenance-videosurveillance-marseille/" style="color:#80d3ff;font-weight:bold;">Voir le contrat</a>.</p>
+</details>
+
+<details>
 <summary>Vous intervenez où ?</summary>
 <p>À Marseille, dans les Bouches-du-Rhône et les communes proches, sous 24&nbsp;h.</p>
 </details>
@@ -1420,7 +1516,7 @@ Vos questions sur la vidéosurveillance sans abonnement
 </div>
 
 </section>
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Sans abonnement, c’est moins sûr ?","acceptedAnswer":{"@type":"Answer","text":"Non. La qualité de la protection dépend du matériel et de l’installation, pas de la mensualité. Vous recevez les alertes directement sur votre téléphone et vous voyez vos caméras en direct, où que vous soyez."}},{"@type":"Question","name":"Quelles marques installez-vous ?","acceptedAnswer":{"@type":"Answer","text":"Du matériel professionnel reconnu, comme Dahua, Hikvision, Reolink ou TP-Link. On choisit selon votre besoin et votre budget."}},{"@type":"Question","name":"Le matériel est garanti ?","acceptedAnswer":{"@type":"Answer","text":"Oui, le matériel que nous installons est garanti 2 ans."}},{"@type":"Question","name":"Vous aidez les commerces pour l’autorisation préfectorale ?","acceptedAnswer":{"@type":"Answer","text":"Oui. Nous plaçons les caméras selon les règles, posons les panneaux d’information et vous aidons à préparer le dossier à déposer en préfecture."}},{"@type":"Question","name":"Vous intervenez où ?","acceptedAnswer":{"@type":"Answer","text":"À Marseille, dans les Bouches-du-Rhône et les communes proches, sous 24 h."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Sans abonnement, c’est moins sûr ?","acceptedAnswer":{"@type":"Answer","text":"Non. La qualité de la protection dépend du matériel et de l’installation, pas de la mensualité. Vous recevez les alertes directement sur votre téléphone et vous voyez vos caméras en direct, où que vous soyez."}},{"@type":"Question","name":"Quelles marques installez-vous ?","acceptedAnswer":{"@type":"Answer","text":"Du matériel professionnel reconnu, comme Dahua, Hikvision, Reolink ou TP-Link. On choisit selon votre besoin et votre budget."}},{"@type":"Question","name":"Le matériel est garanti ?","acceptedAnswer":{"@type":"Answer","text":"Oui, le matériel que nous installons est garanti 2 ans."}},{"@type":"Question","name":"Vous aidez les commerces pour l’autorisation préfectorale ?","acceptedAnswer":{"@type":"Answer","text":"Oui. Nous plaçons les caméras selon les règles, posons les panneaux d’information et vous aidons à préparer le dossier à déposer en préfecture."}},{"@type":"Question","name":"Proposez-vous un contrat de maintenance ?","acceptedAnswer":{"@type":"Answer","text":"Oui, à 39 € par mois, sans engagement : toute la maintenance de vos caméras est comprise."}},{"@type":"Question","name":"Vous intervenez où ?","acceptedAnswer":{"@type":"Answer","text":"À Marseille, dans les Bouches-du-Rhône et les communes proches, sous 24 h."}}]}</script>
 <!-- Fin FAQ SEO ConforCam -->
 <section class="section contact" id="rappel">
 
@@ -1442,7 +1538,7 @@ ConforCam vous recontactera dans les meilleurs délais.
 <div class="coordonnees">
 
 <a href="tel:+33770470218">
-07 70 47 02 18
+<svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>&nbsp;07 70 47 02 18
 </a>
 
 <a href="mailto:contact@conforcam.fr">
@@ -1473,15 +1569,17 @@ Ville *
 </label>
 
 <label>
-Type de bien
+Type de lieu
 <select name="bien">
-<option>Maison</option>
-<option>Appartement</option>
+<option value="">Choisir</option>
 <option>Commerce</option>
+<option>Restaurant ou bar</option>
 <option>Hôtel</option>
 <option>Bureau</option>
 <option>Entrepôt</option>
 <option>Copropriété</option>
+<option>Maison</option>
+<option>Appartement</option>
 <option>Autre</option>
 </select>
 </label>
@@ -1491,13 +1589,13 @@ Votre projet
 <textarea name="projet" rows="4" placeholder="Nombre de caméras envisagé, intérieur ou extérieur, contraintes particulières..."></textarea>
 </label>
 
-<p class="envoi-choix large">Envoyez votre demande&nbsp;:</p>
+<button type="button" class="bouton bouton-principal" id="envoi-mail">Envoyer ma demande</button>
 
-<button type="button" class="bouton bouton-principal" id="envoi-whatsapp">Par WhatsApp</button>
+<button type="button" class="bouton bouton-principal" id="envoi-whatsapp">Envoyer par WhatsApp</button>
 
-<button type="button" class="bouton bouton-principal" id="envoi-mail">Par mail</button>
+<p class="message-form large"></p>
 
-<p class="note-form large">Réponse sous 24&nbsp;h ouvrées. Devis et déplacement gratuits sur Marseille et alentours.</p>
+<p class="note-form large">Réponse sous 24&nbsp;h ouvrées. Devis et déplacement gratuits sur Marseille et alentours. Vos données servent uniquement à traiter votre demande (<a href="/politique-confidentialite/" style="color:#80d3ff;">confidentialité</a>).</p>
 
 </form>
 
@@ -1509,144 +1607,55 @@ Votre projet
 
 <footer>
 
-<img
-src="assets/logo.png"
-alt="Logo ConforCam"
->
-
-<div>
-
-<strong>ConforCam</strong>
-
-<p>
-Caméras et alarmes sans abonnement.
-</p>
-
-</div>
-
-<div>
-
-<a href="tel:+33770470218">
-07 70 47 02 18
-</a>
-
-<a href="mailto:contact@conforcam.fr">
-contact@conforcam.fr 
-</a>
-
+<div class="pied-marque">
+<img src="/assets/logo-entete.webp" width="628" height="301" alt="Logo ConforCam" loading="lazy">
+<p class="slogan">Une vision pour votre confort</p>
+<p>Caméras et alarmes sans abonnement à Marseille et dans les Bouches-du-Rhône.</p>
+<a href="tel:+33770470218">07 70 47 02 18</a>
+<a href="mailto:contact@conforcam.fr">contact@conforcam.fr</a>
 <a class="insta-pied" href="https://www.instagram.com/conforcam13" target="_blank" rel="noopener"><svg class="ico-insta" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg> @conforcam13</a>
-
-<a href="mentions-legales.html">
-Mentions légales
-</a>
-
 </div>
 
 <div>
-<strong>Nos installations à Marseille</strong>
-<a href="camera-surveillance-marseille/">Caméra de surveillance Marseille</a>
-<a href="installation-camera-marseille/">Installation caméra Marseille</a>
-<a href="videosurveillance-marseille/">Vidéosurveillance Marseille</a>
-<a href="alarme-sans-abonnement-marseille/">Alarme sans abonnement Marseille</a>
-<a href="camera-commerce-marseille/">Caméra commerce Marseille</a>
-<a href="camera-surveillance-aubagne/">Caméra de surveillance Aubagne</a>
-<a href="camera-surveillance-la-ciotat/">Caméra de surveillance La Ciotat</a>
-<a href="articles/">Guides</a>
+<strong>Services</strong>
+<a href="/camera-surveillance-marseille/">Caméra de surveillance</a>
+<a href="/installation-camera-marseille/">Installation de caméras</a>
+<a href="/videosurveillance-marseille/">Vidéosurveillance</a>
+<a href="/alarme-sans-abonnement-marseille/">Alarme sans abonnement</a>
+<a href="/maintenance-videosurveillance-marseille/">Contrat de maintenance</a>
+<a href="/depannage-videosurveillance-marseille/">Dépannage</a>
+<a href="/prix-installation-camera-marseille/">Tarifs particuliers</a>
+</div>
+
+<div>
+<strong>Professionnels</strong>
+<a href="/camera-commerce-marseille/">Commerces</a>
+<a href="/camera-surveillance-hotel-marseille/">Hôtels</a>
+<a href="/videosurveillance-copropriete-marseille/">Syndics et copropriétés</a>
+<a href="/blog/camera-surveillance-restaurant-marseille/">Restaurants</a>
+<a href="/blog/bureau-entreprise-marseille-alarme/">Bureaux</a>
+<a href="/blog/">Tous nos conseils</a>
+</div>
+
+<div>
+<strong>Zones d’intervention</strong>
+<a href="/camera-surveillance-marseille/">Marseille</a>
+<a href="/camera-surveillance-aix-en-provence/">Aix-en-Provence</a>
+<a href="/camera-surveillance-aubagne/">Aubagne</a>
+<a href="/camera-surveillance-allauch/">Allauch</a>
+<a href="/camera-surveillance-plan-de-cuques/">Plan-de-Cuques</a>
+<a href="/camera-surveillance-cassis/">Cassis</a>
+<a href="/camera-surveillance-la-ciotat/">La Ciotat</a>
+<a href="/mentions-legales.html">Mentions légales</a>
+<a href="/politique-confidentialite/">Confidentialité</a>
 </div>
 
 </footer>
 
+<div class="barre-mobile"><a class="appel" href="tel:+33770470218"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"/></svg>Appeler</a><a class="devis" href="#rappel">Devis gratuit</a></div>
 
 
 
-<script>
-
-(function(){
-
-const f = document.getElementById("form-devis");
-if(!f) return;
-
-const msg = document.createElement("p");
-msg.className = "message-form large";
-f.appendChild(msg);
-
-function valeur(n){
-const c = f.elements[n];
-return c ? c.value.trim() : "";
-}
-
-function verifier(){
-let ok = true;
-["nom","telephone","ville"].forEach(function(n){
-const c = f.elements[n];
-if(!c.value.trim()){ c.classList.add("champ-erreur"); ok = false; }
-else { c.classList.remove("champ-erreur"); }
-});
-if(!ok){
-msg.className = "message-form large visible ko";
-msg.textContent = "Merci de renseigner votre nom, votre téléphone et votre ville.";
-}
-return ok;
-}
-
-function texte(){
-const l = [];
-l.push("Bonjour ConforCam, je souhaite un devis.");
-l.push("");
-l.push("Nom : " + valeur("nom"));
-l.push("Téléphone : " + valeur("telephone"));
-l.push("Ville : " + valeur("ville"));
-l.push("Type de bien : " + valeur("bien"));
-const p = valeur("projet");
-if(p) l.push("Projet : " + p);
-return l.join("\n");
-}
-
-function confirme(){
-msg.className = "message-form large visible ok";
-msg.textContent = "Votre demande est prête. Il ne reste plus qu'à l'envoyer dans la fenêtre qui vient de s'ouvrir.";
-}
-
-document.getElementById("envoi-whatsapp").addEventListener("click", function(){
-if(!verifier()) return;
-window.open("https://wa.me/33770470218?text=" + encodeURIComponent(texte()), "_blank", "noopener");
-confirme();
-});
-
-document.getElementById("envoi-mail").addEventListener("click", function(){
-if(!verifier()) return;
-var bouton=this;
-bouton.disabled=true;
-var donnees=new FormData();
-donnees.append("nom", valeur("nom"));
-donnees.append("telephone", valeur("telephone"));
-donnees.append("ville", valeur("ville"));
-donnees.append("type_de_bien", valeur("bien"));
-donnees.append("projet", valeur("projet"));
-fetch("https://formspree.io/f/xdeelpbj", {method:"POST", body:donnees, headers:{"Accept":"application/json"}})
-.then(function(r){
-if(r.ok){
-msg.className="message-form large visible ok";
-msg.textContent="Merci, votre demande est bien envoyée. Nous vous recontactons rapidement.";
-f.reset();
-}else{
-throw new Error("erreur");
-}
-})
-.catch(function(){
-msg.className="message-form large visible ko";
-msg.textContent="Le message n'a pas pu partir. Réessayez ou appelez-nous au 07 70 47 02 18.";
-})
-.finally(function(){ bouton.disabled=false; });
-});
-
-f.addEventListener("input", function(e){
-e.target.classList.remove("champ-erreur");
-});
-
-})();
-
-</script>
 
 <script>
 (function(){
@@ -1669,37 +1678,8 @@ cadre.querySelector('.diaporama-prev').addEventListener('click',function(){ mont
 cadre.querySelector('.diaporama-next').addEventListener('click',function(){ montre(i+1); lance(); });
 })();
 </script>
-<div class="cookie-bandeau" id="cookie-bandeau" hidden>
-<p>Ce site utilise des cookies. <a href="mentions-legales.html">En savoir plus</a></p>
-<div class="cookie-boutons">
-<button type="button" id="cookie-refuser">Refuser</button>
-<button type="button" id="cookie-accepter" class="cookie-ok">Accepter</button>
-</div>
-</div>
-<script>
-(function(){
-var ID='G-CK7Z43CXJ9';
-function charger(){
-  var s=document.createElement('script');
-  s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+ID;
-  document.head.appendChild(s);
-  window.dataLayer=window.dataLayer||[];
-  window.gtag=function(){dataLayer.push(arguments);};
-  gtag('js',new Date());gtag('config',ID);
-}
-var b=document.getElementById('cookie-bandeau');
-var choix=null;
-try{choix=localStorage.getItem('conforcam-cookies');}catch(e){}
-if(choix==='oui'){charger();}
-else if(choix!=='non'){b.hidden=false;}
-function enregistrer(v){try{localStorage.setItem('conforcam-cookies',v);}catch(e){}b.hidden=true;}
-document.getElementById('cookie-accepter').addEventListener('click',function(){enregistrer('oui');charger();});
-document.getElementById('cookie-refuser').addEventListener('click',function(){enregistrer('non');});
-})();
-</script>
-<script>
-(function(){var f=document.getElementById('form-devis');if(!f||!('IntersectionObserver' in window))return;new IntersectionObserver(function(e){document.body.classList.toggle('cache-flottants',e[0].isIntersecting);},{threshold:0.2}).observe(f);})();
-</script>
+<div class="cookie-bandeau" id="cookie-bandeau" hidden><p>Mesure d’audience anonyme. <a href="/politique-confidentialite/">En savoir plus</a></p><button type="button" id="cookie-refuser">Refuser</button><button type="button" id="cookie-accepter" class="cookie-ok">Accepter</button></div>
+<script src="/assets/site.js" defer></script>
 </body>
 
 </html>
