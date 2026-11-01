@@ -933,6 +933,26 @@ background:#2ab9ff;
 .carte-lien{display:inline-flex;align-items:center;gap:7px;margin-top:16px;color:#80d3ff;font-weight:700;text-decoration:none;}
 .carte-lien::after{content:"";position:absolute;inset:0;border-radius:15px;}
 .carte:hover .carte-lien{text-decoration:underline;}
+/* Economies, etapes, FAQ (nov. 2026) */
+.economies{background:linear-gradient(180deg,#061a2d,#03101c);}
+.economies-boite{max-width:1000px;margin:0 auto;display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center;padding:34px;background:linear-gradient(180deg,#092740,#051522);border:1px solid var(--bordure);border-radius:16px;}
+.economies-chiffre{font-size:clamp(46px,6vw,72px);font-weight:700;color:var(--bleu-clair);line-height:1;white-space:nowrap;}
+.economies-chiffre small{display:block;font-size:16px;color:var(--texte-secondaire);font-weight:400;margin-top:8px;}
+.economies-boite p{margin:0 0 10px;color:#d7e4ed;font-size:18px;}
+.economies-boite .petite-ligne{font-size:13px;color:var(--texte-secondaire);margin:0;}
+.pourquoi .cartes{grid-template-columns:repeat(4,1fr);}
+.pourquoi .carte h3{font-size:21px;}
+.pourquoi .carte p{font-size:16px;}
+.etapes{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(5,1fr);gap:16px;counter-reset:etape;}
+.etapes li{counter-increment:etape;padding:22px;background:#071e32;border:1px solid var(--bordure);border-radius:13px;color:#cfdfeb;font-size:15px;}
+.etapes li::before{content:counter(etape);display:flex;align-items:center;justify-content:center;width:36px;height:36px;margin-bottom:12px;border-radius:50%;background:rgba(21,159,255,.16);color:var(--bleu-clair);font-weight:700;}
+.etapes strong{display:block;color:#fff;font-size:17px;margin-bottom:4px;}
+.faq-accueil{max-width:900px;}
+.faq-accueil details{margin:0 0 12px;padding:18px 20px;background:#071e32;border:1px solid var(--bordure);border-radius:11px;}
+.faq-accueil summary{cursor:pointer;font-weight:700;font-size:17px;}
+.faq-accueil details p{margin:12px 0 0;color:#cfdfeb;}
+@media(max-width:900px){.pourquoi .cartes{grid-template-columns:1fr 1fr;}.etapes{grid-template-columns:1fr 1fr;}.economies-boite{grid-template-columns:1fr;gap:18px;}}
+@media(max-width:600px){.pourquoi .cartes,.etapes{grid-template-columns:1fr;}.economies-boite{padding:24px;}.economies-boite p{font-size:16px;}}
 </style>
 
 
@@ -951,6 +971,7 @@ background:#2ab9ff;
 
 <nav>
 <a href="#prestations">Prestations</a>
+<a href="/camera-commerce-marseille/">Professionnels</a>
 <a href="/prix-installation-camera-marseille/">Tarifs</a>
 <a href="/depannage-videosurveillance-marseille/">Dépannage</a>
 <a href="/articles/">Articles</a>
@@ -1039,6 +1060,26 @@ alt="Technicien ConforCam installant une caméra de surveillance dans un commerc
 <div class="marques-piste">
 <span>Dahua</span><span>Hikvision</span><span>Reolink</span><span>TP-Link</span><span>Xvision</span><span>Ezviz</span><span>Uniview</span><span>Imou</span><span>Tapo</span><span>Axis</span><span>Bosch</span><span>Hanwha</span>
 <span aria-hidden="true">Dahua</span><span aria-hidden="true">Hikvision</span><span aria-hidden="true">Reolink</span><span aria-hidden="true">TP-Link</span><span aria-hidden="true">Xvision</span><span aria-hidden="true">Ezviz</span><span aria-hidden="true">Uniview</span><span aria-hidden="true">Imou</span><span aria-hidden="true">Tapo</span><span aria-hidden="true">Axis</span><span aria-hidden="true">Bosch</span><span aria-hidden="true">Hanwha</span>
+</div>
+</div>
+
+</section>
+
+<section class="section economies" id="economies">
+
+<span class="surtitre">
+Ce que vous économisez
+</span>
+
+<h2>
+Pas d’abonnement, ce sont des économies chaque année
+</h2>
+
+<div class="economies-boite">
+<div class="economies-chiffre">780&nbsp;€ HT<small>d’abonnement évités par an, jusqu’à</small></div>
+<div>
+<p>Avec une télésurveillance classique, un commerce paie souvent plus de 60&nbsp;€ HT par mois, tant que dure le contrat. Chez ConforCam, vous payez l’installation et le matériel une fois. Ensuite, vos caméras sont à vous et vous ne nous devez rien de plus.</p>
+<p class="petite-ligne">Comparaison basée sur les tarifs publics d’offres de télésurveillance professionnelles en 2026. Montant indicatif.</p>
 </div>
 </div>
 
@@ -1288,29 +1329,98 @@ Pourquoi choisir ConforCam
 Votre matériel vous appartient.
 </h2>
 
-<div class="avantages">
+<div class="cartes">
 
-<div class="avantage">
-Installation professionnelle
-</div>
+<article class="carte">
+<span class="carte-numero">01</span>
+<h3>Vos images restent chez vous</h3>
+<p>L’enregistrement se fait en local, sur un enregistreur (NVR/DVR) ou une carte mémoire installés chez vous. Aucun abonnement cloud à payer, vous gardez la main sur vos images.</p>
+</article>
 
-<div class="avantage">
-Programmation sur smartphone
-</div>
+<article class="carte">
+<span class="carte-numero">02</span>
+<h3>Détection intelligente incluse</h3>
+<p>Selon les modèles, la caméra fait la différence entre une personne, un véhicule et un simple mouvement. Beaucoup moins de fausses alertes, sans option payante à débloquer.</p>
+</article>
 
-<div class="avantage">
-Particuliers et professionnels
-</div>
+<article class="carte">
+<span class="carte-numero">03</span>
+<h3>Une caméra qui dissuade toute seule</h3>
+<p>Sur certains modèles, la caméra réagit dès qu’on s’approche : projecteur, sirène ou message vocal. L’intrus est dérangé avant même que vous ayez ouvert l’appli.</p>
+</article>
 
-<div class="avantage">
-Assistance après installation
-</div>
+<article class="carte">
+<span class="carte-numero">04</span>
+<h3>Ça enregistre même sans internet</h3>
+<p>Si votre box tombe en panne, l’enregistrement local continue. En option, un onduleur ou une alimentation solaire pour tenir pendant une coupure de courant.</p>
+</article>
 
 </div>
 
 </section>
 
+<section class="section" id="etapes">
+
+<span class="surtitre">
+Comment ça se passe
+</span>
+
+<h2>
+De l’appel à l’installation
+</h2>
+
+<ol class="etapes">
+<li><strong>Devis gratuit</strong>Vous nous appelez ou remplissez le formulaire.</li>
+<li><strong>Visite sur place</strong>On étudie vos besoins, les zones à filmer et les points sensibles.</li>
+<li><strong>Installation</strong>Pose propre des caméras, de l’enregistreur et/ou de l’alarme.</li>
+<li><strong>Configuration</strong>On installe l’appli sur votre téléphone et on vous montre comment l’utiliser.</li>
+<li><strong>Suivi</strong>Assistance après installation et contrat de maintenance si vous le souhaitez.</li>
+</ol>
+
+</section>
+
 <!-- FAQ SEO ConforCam -->
+<section class="section" id="faq">
+
+<span class="surtitre">
+Questions fréquentes
+</span>
+
+<h2>
+Vos questions sur la vidéosurveillance sans abonnement
+</h2>
+
+<div class="faq-accueil">
+
+<details>
+<summary>Sans abonnement, c’est moins sûr ?</summary>
+<p>Non. La qualité de la protection dépend du matériel et de l’installation, pas de la mensualité. Vous recevez les alertes directement sur votre téléphone et vous voyez vos caméras en direct, où que vous soyez.</p>
+</details>
+
+<details>
+<summary>Quelles marques installez-vous ?</summary>
+<p>Du matériel professionnel reconnu, comme Dahua, Hikvision, Reolink ou TP-Link. On choisit selon votre besoin et votre budget.</p>
+</details>
+
+<details>
+<summary>Le matériel est garanti ?</summary>
+<p>Oui, le matériel que nous installons est garanti 2 ans.</p>
+</details>
+
+<details>
+<summary>Vous aidez les commerces pour l’autorisation préfectorale ?</summary>
+<p>Oui. Nous plaçons les caméras selon les règles, posons les panneaux d’information et vous aidons à préparer le dossier à déposer en préfecture. <a href="/camera-commerce-marseille/" style="color:#80d3ff;font-weight:bold;">Voir notre offre pour les professionnels</a>.</p>
+</details>
+
+<details>
+<summary>Vous intervenez où ?</summary>
+<p>À Marseille, dans les Bouches-du-Rhône et les communes proches, sous 24&nbsp;h.</p>
+</details>
+
+</div>
+
+</section>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Sans abonnement, c’est moins sûr ?","acceptedAnswer":{"@type":"Answer","text":"Non. La qualité de la protection dépend du matériel et de l’installation, pas de la mensualité. Vous recevez les alertes directement sur votre téléphone et vous voyez vos caméras en direct, où que vous soyez."}},{"@type":"Question","name":"Quelles marques installez-vous ?","acceptedAnswer":{"@type":"Answer","text":"Du matériel professionnel reconnu, comme Dahua, Hikvision, Reolink ou TP-Link. On choisit selon votre besoin et votre budget."}},{"@type":"Question","name":"Le matériel est garanti ?","acceptedAnswer":{"@type":"Answer","text":"Oui, le matériel que nous installons est garanti 2 ans."}},{"@type":"Question","name":"Vous aidez les commerces pour l’autorisation préfectorale ?","acceptedAnswer":{"@type":"Answer","text":"Oui. Nous plaçons les caméras selon les règles, posons les panneaux d’information et vous aidons à préparer le dossier à déposer en préfecture."}},{"@type":"Question","name":"Vous intervenez où ?","acceptedAnswer":{"@type":"Answer","text":"À Marseille, dans les Bouches-du-Rhône et les communes proches, sous 24 h."}}]}</script>
 <!-- Fin FAQ SEO ConforCam -->
 <section class="section contact" id="rappel">
 
