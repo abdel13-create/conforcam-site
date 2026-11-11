@@ -1,0 +1,8 @@
+.barre-mobile{display:none}
+@media(max-width:900px){
+.barre-mobile{display:grid;grid-template-columns:1fr 1fr;gap:10px;position:fixed;left:0;right:0;bottom:0;z-index:60;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(2,11,20,.97);border-top:1px solid #1b5278;box-shadow:0 -8px 24px rgba(0,0,0,.45)}
+.barre-mobile a{display:block;text-align:center;padding:13px 8px;border-radius:9px;font:800 16px Arial,sans-serif;color:#fff;text-decoration:none}
+.barre-mobile .bm-appel{border:1px solid #2a729f;background:#071d31}
+.barre-mobile .bm-devis{background:linear-gradient(#29b8ff,#0878dc)}
+body{padding-bottom:74px}
+}
